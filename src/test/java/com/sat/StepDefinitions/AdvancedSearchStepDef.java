@@ -77,6 +77,61 @@ public class AdvancedSearchStepDef {
         }
 	}
 	
+	@Then("user validate acending and descending order of sorting for Trend column and Order Number column")
+	public void validate_sorting_trend_and_ordernumber_column() {
+		try {
+			advancedSearch.sortingOfTrendAndOrderNumber();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user validate acending and descending order of sorting for All column")
+	public void validate_sorting_for_all_column() {
+		try {
+			advancedSearch.sortingOfAllColumn();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user validated acending and descending order of sorting for Trend column and Order Number column")
+	public void validated_sorting_InStoretrend_and_InStoreordernumber_column() {
+		try {
+			advancedSearch.sortingOfInStoreTrendAndOrderNumber();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user validated acending and descending order of sorting for All column")
+	public void validate_sorting_forInStore__all_column() {
+		try {
+			advancedSearch.sortingOfInStoreAllColumn();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("validated Purchses Price text Box should be display for B2B Seller")
+	public void validate_purchse_entry_field() {
+		try {
+			advancedSearch.validatePurchasePriceEntryBox();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("validated Purchses Price text Box should not be display for Normal Seller")
+	public void validated_Purchses_Price_text_Box_should_not_be_display_for_Normal_Seller() {
+		try {
+		advancedSearch.validatePurchasePriceField();
+	 } catch (Exception e) {
+         System.out.println("Exception :" + e + " has occurred");
+     }
+	}
+
+	
 	@Then("validated Brand entry field and category dropdown")
 	public void validated_Instore_Brand_entry_field_and_category_dropdown() {
 		try {
@@ -194,6 +249,28 @@ public class AdvancedSearchStepDef {
 		try {
 			advancedSearch.validateColorDropDown();
 			advancedSearch.selectColor(string);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+		
+	}
+	
+	@Then("user validate and select Trend {string} from Trend dropdown")
+	public void user_validate_and_select_trend_from_trend_dropdown(String string) {
+		try {
+			advancedSearch.validateInStoreTrendDropDown();
+			advancedSearch.selectDropDownValue(string);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+		
+	}
+	
+	@Then("user validated and select Trend {string} from Trend dropdown")
+	public void user_validated_and_select_trend_from_trend_dropdown(String string) {
+		try {
+			advancedSearch.validateTrendDropDown();
+			advancedSearch.selectDropDownValue(string);
         } catch (Exception e) {
             System.out.println("Exception :" + e + " has occurred");
         }

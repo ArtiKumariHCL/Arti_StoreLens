@@ -53,6 +53,9 @@ public class AdvancedSearchPage {
 	@FindBy(xpath = "//input[@appmagic-control='TxtBrandAdvtextbox']")
 	private WebElement BrandEntryBox;
 	
+	@FindBy(xpath = "//input[@appmagic-control='txtPurchasePrice_1textbox']")
+	private WebElement PurchaseEntryBox;
+	
 	@FindBy(xpath = "//input[@appmagic-control='TxtBrandAdv_ISTtextbox']")
 	private WebElement inStoreBrandEntryBox;
 	
@@ -74,8 +77,14 @@ public class AdvancedSearchPage {
 	@FindBy(xpath = "//div[@data-control-name='cbPatternAdv']") 
 	private WebElement patternComboBox;
 	
+	@FindBy(xpath = "//div[@data-control-name='cbAdvStatus_2']") 
+	private WebElement inTrendComboBox;
+	
 	@FindBy(xpath = "//div[@data-control-name='cbColorAdvInstore']") 
 	private WebElement inStorecolorComboBox;
+	
+	@FindBy(xpath = "//div[@data-control-name='cbAdvStatus_4']") 
+	private WebElement inStoretrendComboBox;
 	
 	@FindBy(xpath = "//div[@data-control-name='cbPatternAdvInstore']") 
 	private WebElement inStorepatternComboBox;
@@ -152,14 +161,70 @@ public class AdvancedSearchPage {
     @FindBy(xpath = "//div[text()='Items']/parent::div")  //div[@data-control-name='icnTabSellerItemsPreRegisteredMIS_5']
 	private WebElement item;
     
-//    @FindBy(xpath = "")
-//	private WebElement ;
+    @FindBy(xpath = "//div[@data-control-name='icnSortTrendHeader']")
+	private WebElement sortTrend;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortOrderNumber']")
+	private WebElement sortOrderNumber;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortBrandHeaderMIS']")
+	private WebElement sortBrand;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortCategoryHeaderMIS']")
+	private WebElement sortCategory;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortSizeHeaderMIS']")
+	private WebElement sortSize;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortItemsIdHeaderMIS']")
+	private WebElement sortItemId;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortDateSubmittedHeaderMIS']")
+   	private WebElement sortDate;
+    
+    @FindBy(xpath = "//div[@data-control-name='lblb2bheader']")
+   	private WebElement sortB2B;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortStatusHeaderMIS']")
+   	private WebElement sortStatus;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortPriceHeaderMIS']")
+   	private WebElement sortPrice;
+    
+    
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortTrendHeader_1']")
+   	private WebElement sortInstoreTrend;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortOrderNumber_1']")
+   	private WebElement sortInstoreOrderNumber;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortStatusHeaderMIS_2']")
+   	private WebElement sortInstoreStatus;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortPriceHeaderMIS_2']")
+   	private WebElement sortInstorePrice;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortSizeHeaderEXP_1']")
+   	private WebElement sortInstoreSize;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortBrandHeaderMIS_2']")
+   	private WebElement sortInstoreBrand;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortCategoryHeaderMIS_2']")
+   	private WebElement sortInstoreCategory;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortItemsIdHeaderMIS_2']")
+   	private WebElement sortInstoreItemId;
+    
+    @FindBy(xpath = "//div[@data-control-name='icnSortDateSubmittedHeaderMIS_2']")
+   	private WebElement sortInstoreDate;
+    
+//    @FindBy(xpath = " ")
+//   	private WebElement ;
 //    
 //    @FindBy(xpath = "")
-//	private WebElement ;
-//    
-//    @FindBy(xpath = "")
-//	private WebElement ;
+//   	private WebElement ;
     
 	@FindBy(xpath = "//div[text()='Environment']")
 	private WebElement clickOnEnvironment;
@@ -215,6 +280,62 @@ public class AdvancedSearchPage {
 		AdvancedSearch.click();
 		Wait.untilPageLoadComplete(driver, 500);
 	}
+	
+	public void sortingOfTrendAndOrderNumber()
+	{
+		sortTrend.click();
+		sortTrend.click();
+		sortOrderNumber.click();
+		sortOrderNumber.click();
+	}
+	
+	public void sortingOfAllColumn()
+	{
+		sortDate.click();
+		sortDate.click();
+		sortItemId.click();
+		sortItemId.click();
+		sortCategory.click();
+		sortCategory.click();
+		sortBrand.click();
+		sortBrand.click();
+		sortSize.click();
+		sortSize.click();
+		sortPrice.click();
+		sortPrice.click();
+		sortB2B.click();
+		sortB2B.click();
+		sortStatus.click();
+		sortStatus.click();
+		
+	}
+	
+	public void sortingOfInStoreTrendAndOrderNumber()
+	{
+		sortInstoreTrend.click();
+		sortInstoreTrend.click();
+		sortInstoreOrderNumber.click();
+		sortInstoreOrderNumber.click();
+	}
+	
+	public void sortingOfInStoreAllColumn()
+	{
+		sortInstoreDate.click();
+		sortInstoreDate.click();
+		sortInstoreItemId.click();
+		sortInstoreItemId.click();
+		sortInstoreCategory.click();
+		sortInstoreCategory.click();
+		sortInstoreBrand.click();
+		sortInstoreBrand.click();
+		sortInstoreSize.click();
+		sortInstoreSize.click();
+		sortInstorePrice.click();
+		sortInstorePrice.click();
+		sortInstoreStatus.click();
+		sortInstoreStatus.click();
+	}
+	
 	public void validateAdvSrchPageTitle(String AdvSrch, String advsrchtxt) {
 		String advcsrchtitle = AdvancedSearchPageTitle.getText();
 		Wait.untilPageLoadComplete(driver, 30);
@@ -254,6 +375,25 @@ public class AdvancedSearchPage {
 		Wait.untilPageLoadComplete(driver, 30);
 		assertTrue(fieldType.equalsIgnoreCase("text"));
 		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void validatePurchasePriceEntryBox()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		PurchaseEntryBox.click();
+		String fieldType = PurchaseEntryBox.getAttribute("type");
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(fieldType.equalsIgnoreCase("text"));
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void validatePurchasePriceField()
+	{
+		if(PurchaseEntryBox.isDisplayed())
+			System.out.println("Purchases proce text box is displayed");
+		else
+			System.out.println("Purchases proce text box is not displayed");
+			
 	}
 		
 	public void enterBrand(String brand)
@@ -375,6 +515,28 @@ public class AdvancedSearchPage {
 		assertTrue(CategoryBox.equalsIgnoreCase("listbox"));
 	}
 	
+	public void validateInStoreTrendDropDown() {
+		Wait.untilPageLoadComplete(driver,200);
+		inStoretrendComboBox.click();
+		Wait.untilPageLoadComplete(driver,200);
+		String CategoryBox = Categorylists.getAttribute("role");
+		assertTrue(CategoryBox.equalsIgnoreCase("listbox"));
+	}
+	
+	public void validateTrendDropDown() {
+		Wait.untilPageLoadComplete(driver,200);
+		inTrendComboBox.click();
+		Wait.untilPageLoadComplete(driver,200);
+		String CategoryBox = Categorylists.getAttribute("role");
+		assertTrue(CategoryBox.equalsIgnoreCase("listbox"));
+	}
+	
+	public void selectDropDownValue(String color)
+	{
+    	Wait.untilPageLoadComplete(driver, 30);
+    	driver.findElement(By.xpath("//span[text()='"+color+"']")).click();
+    	Wait.untilPageLoadComplete(driver, 30);
+	}
 	
 	public void selectColor(String color)
 	{
