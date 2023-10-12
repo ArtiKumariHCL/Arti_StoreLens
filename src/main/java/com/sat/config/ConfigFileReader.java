@@ -141,8 +141,8 @@ public class ConfigFileReader {
 	public String getB2BHomeAppUrl(String B2B_url) {
 	//public String getB2BHomeAppUrl() {
 		String url = properties.getProperty(B2B_url);
-		System.out.println(B2B_url);
-		System.out.println(url);
+		//.System.out.println(B2B_url);
+		//System.out.println(url);
 		if (url != null)
 			return url;
 		else
@@ -182,8 +182,8 @@ public class ConfigFileReader {
 	*/
 	public String B2BAppUserId(String userid) {
 		String UserID = properties.getProperty(userid);
-		System.out.println(UserID);
-		System.out.println(UserID);
+		//System.out.println(UserID);
+		//System.out.println(UserID);
 		if (UserID != null)
 			return UserID;
 		else
