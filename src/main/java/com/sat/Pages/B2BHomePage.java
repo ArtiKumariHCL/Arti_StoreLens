@@ -65,7 +65,7 @@ public class B2BHomePage {
 	@FindBy(xpath ="//div[@data-control-name='btnNewOrder_PS']//div[contains(text(),'NEW ORDER')]")
 	private WebElement order_button;
 
-	@FindBy(xpath ="//div[@class='addFileContent_1k88298']//following::input")
+	@FindBy(xpath ="//input[@aria-label='Upload file']") //div[@class='addFileContent_1k88298']//following::input
 	private WebElement upload_excel;
 	@FindBy(xpath ="//div[@data-control-name='btnSaveChangeStoreMIS_6']")
 	private WebElement upload_excel_pending;
@@ -173,12 +173,72 @@ public class B2BHomePage {
 
 	}
 	
+	public void validateHeading(String heading)
+	{
+		String actual=driver.findElement(By.xpath("//*[text()='"+heading+"']")).getText();
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(actual.equalsIgnoreCase(heading));
+		Wait.untilPageLoadComplete(driver, 30);
+		
+	}
+	
+	public void verfyWarningForDuplicateDetail()
+	{
+		String errorMsg=driver.findElement(By.xpath("//div[@data-control-name='lblErrorNameMIS_9']")).getText();
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(errorMsg.equalsIgnoreCase("**File cannot be uploaded, because there is information wrong or missing, or a double item ID. Please correct the file and try again to upload it."));
+		Wait.untilPageLoadComplete(driver, 30);
+		
+		String warningMsg=driver.findElement(By.xpath("//div[@data-control-name='lblFirstNameMIS_8']")).getText();
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(warningMsg.equalsIgnoreCase("**Please make sure that the Item ID and price are filled in. Otherwise you will not be able to click 'NEXT'."));
+		Wait.untilPageLoadComplete(driver, 30);
+		
+	}
+	
+		
+	public void selectReceivingStoreValue(String color)
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		driver.findElement(By.xpath("//div[@data-control-name='ddStore_2']")).click();
+    	Wait.untilPageLoadComplete(driver, 30);
+    	driver.findElement(By.xpath("(//div[@role='option'])[2]")).click();
+    	//(//*[text()='Weekday Shoreditch(GB0977)'])[2]
+    	
+    	Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	
+	public void verifytext(DataTable datatable) throws InterruptedException {
+		{
+			List<String> actual = datatable.asList();
+			List<WebElement> excepted=driver.findElements(By.xpath("//div[contains(@data-control-name,'Label4')]"));
+			System.out.println("Size = "+ actual.size());
+			for (int i = 0; i <= actual.size()-1; i++) {
+	        	
+		                 //String content = actual.get(i);
+		                String data= excepted.get(i).getText();
+		                Thread.sleep(2000);
+		            	System.out.println("Data Contain : "+data);
+		            	
+		            	if(actual.get(i).equalsIgnoreCase(data))
+		            	{
+		            		System.out.println("This is Expected:" + data+" == "+" This is Actual:  "+actual.get(i));
+		            	}
+		            	else
+		            	{
+		            		System.out.println( "This is Expected  "+data+" is not equal "+"This is Actual  "+actual.get(i));
+		            	}
+		}
+		
+			}
+	}
 
 	public void verifyentity(DataTable datatable) throws InterruptedException {
 		{
 			List<String> actual = datatable.asList();
 			System.out.println("Size = "+ actual.size());
-			for (int i = 0; i <= actual.size()-1; i++) {
+			for (int i = 0; i <= actual.size(); i++) {
 	        	
 		                 String content = actual.get(i);
 		                Thread.sleep(2000);
@@ -465,7 +525,7 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
 					
 				}
 				 System.out.println("Column Name:"+columnName);
-					for(int i = 0; i <columnName.size(); i++) {	        	
+					for(int i = 0; i <columnName.size()-1; i++) {	        	
 				           String Size = actual.get(i);
 				           System.out.println(Size);
 						 String excelValue=columnName.get(i);

@@ -14,7 +14,7 @@ import io.cucumber.testng.CucumberOptions;
 			//plugin={"pretty","json:target/cucumber.json","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:","html:target/cucumber-reports/report.html"},
 			//tags=("@AdminTool_And_Click&Meet"))
 			//tags ={"@ResalRegistration or @ResalForgotpassword or @RegisteringItem"})//@ResalForgotpassword //@RegisteringItem //@ResalRegistration
-	tags= {"@US11877"
+	tags= {"@US12046"
 			
 //			"@Validation_of_B2B_File_Upload_for_a_New_Order_for_HM_Flamingo or \r \n" +
 //			"@Validation_of_B2B_File_Upload_for_a_Existing_Order_for_HM_Flamingo or \r \n" +

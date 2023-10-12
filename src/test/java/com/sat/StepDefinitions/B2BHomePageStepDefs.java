@@ -57,6 +57,16 @@ public class B2BHomePageStepDefs {
 				//manageuser.B2BLogin(user1,password);
 				manageuser.B2BLogin(config.B2BAppUserId(user1), config.B2BAppPassword(password));
 	}
+	@Then("user validate text {string}")
+	public void validate_text(String text)
+	{
+		try {
+		bbhomepage.validateHeading(text);
+	} catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
+	}
+	
 	@Then("validate B2B entity {string} and {string}")
 	public void validate_B2B_entity(String ManageNewItem,String ManageExpiredItem) throws InterruptedException {
 		bbhomepage.validateB2BhomeEntity(ManageNewItem, ManageExpiredItem);
@@ -64,7 +74,7 @@ public class B2BHomePageStepDefs {
 	@Then("verify all entities are appearing under Manage new items")
     public void verify_all_tabs_are_appearing_on_the_Contact_Form(DataTable datatable) {
         try {
-        	bbhomepage.verifyentity(datatable);
+        	bbhomepage.verifytext(datatable);
         } catch (Exception e) {
             System.out.println("Exception :" + e + " has occurred");
         }
@@ -88,6 +98,17 @@ public class B2BHomePageStepDefs {
 	 {
 		 bbhomepage.Click_order();
 	 }
+	 
+	 @Then("user validate and select Receiving Store {string} from Receiving Store dropdown")
+		public void user_validate_and_select_ReceivingStore_from_dropdown(String string) {
+			try {
+				bbhomepage.selectReceivingStoreValue(string);
+	        } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+			
+		}
+	 
 	 @And("click on upload file to excel {string} and Click on done button")
 	 public void Click_on_upload_file(String downloadedPath)
 	 {
@@ -97,6 +118,15 @@ public class B2BHomePageStepDefs {
 	    public void verify_entities_are_appearing_on_the_pending_screen(DataTable datatable) {
 		try {
 	        	bbhomepage.validatependingScren1_3(datatable);
+	        } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+	    }
+	 
+	 @And("user validate warning message for duplicate item detail")
+	 public void user_validate_warning_message_for_duplicate_item_detail() {
+	        try {
+	        	bbhomepage.verfyWarningForDuplicateDetail();
 	        } catch (Exception e) {
 	            System.out.println("Exception :" + e + " has occurred");
 	        }
@@ -151,12 +181,20 @@ public class B2BHomePageStepDefs {
 	 @And("Click on Sending In-transit and valiadate the detail matches with uploaded file")
 	 public void click_sending_Intransit_validate_deatils_with_uploaded_file(DataTable datatable)
 	 {
+		 try {
 		 bbhomepage.Validatesending_Intransit(datatable);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @Then("validate the field data with entities {string}")
 	 public void validate_excelfield(String exlpath,DataTable datatable) throws IOException
 	 {
+		 try {
 		 bbhomepage.Validate_exceldata(exlpath,datatable);
+	 } catch (Exception e) {
+         System.out.println("Exception :" + e + " has occurred");
+     }
 	 }
 	//feature 2 for B2B existing item 
 	 @And("Click on New Order pending {string} and {string}")
