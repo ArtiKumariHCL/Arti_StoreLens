@@ -57,11 +57,62 @@ public class B2BHomePageStepDefs {
 				//manageuser.B2BLogin(user1,password);
 				manageuser.B2BLogin(config.B2BAppUserId(user1), config.B2BAppPassword(password));
 	}
+	
+	
 	@Then("user validate text {string}")
 	public void validate_text(String text)
 	{
 		try {
 		bbhomepage.validateHeading(text);
+	} catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
+	}
+	@Then("user validate text {string} in Resale App B2B page")
+	public void validate_text_Resale_App_B2BPage(String text)
+	{
+		try {
+		bbhomepage.validateResaleAppB2BPageHeading(text);
+	} catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
+	}
+	
+	@Then("user validate text {string} and {string}")
+	public void validate_text_Resale_App_B2B_ActionNeeded(String text1,String text2)
+	{
+		try {
+		bbhomepage.validateB2BandActionNeededText(text1, text2);
+	} catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
+	}
+	
+	@Then("user click on receiving count and validate text {string}")
+	public void user_validate_In_Transit_Receiving(String text)
+	{
+		try {
+		bbhomepage.validateInTransitReceivingCount(text);
+	} catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
+	}
+	
+	@Then("user click on expired count and validate text {string}")
+	public void user_validate_Expired_Count(String text)
+	{
+		try {
+		bbhomepage.validateExpiredB2BCount(text);
+	} catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
+	}
+	
+	@Then("user click on sending count and validate text {string}")
+	public void user_validate_Sending_Count(String text)
+	{
+		try {
+		bbhomepage.validateSendingCount(text);
 	} catch (Exception e) {
         System.out.println("Exception :" + e + " has occurred");
     }
@@ -93,6 +144,14 @@ public class B2BHomePageStepDefs {
 		 bbhomepage.Click_new_order();
 		 
 	 }
+	 
+	 @And("click on Order button")
+	 public void click_onorder_button()
+	 {
+		 bbhomepage.Click_on_order();
+		 
+	 }
+	 
 	 @Then("navigate to New Order")
 	 public void click_order()
 	 {
@@ -252,11 +311,35 @@ public class B2BHomePageStepDefs {
 	            System.out.println("Exception :" + e + " has occurred");
 	        }
 	    }
+	 @And("click on three dots and Validate field are visible in B2B App")
+	 public void Click_threedots_validate_field_in_b2bApp(DataTable datatable) throws IOException, InterruptedException
+	 {
+		
+		 try {
+	        	bbhomepage.threedots_click_validate_fields_in_B2BApp(datatable);
+	        } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+	    }
+	 
 	 @Then ("Click on Report as {string} status")
 	 public void Click_BrokenStatus(String statusupdate) 
 	 {
 		 bbhomepage.clickOnMissing(statusupdate);
 	 }
+	 
+	 @Then ("Click on Change Store as {string} option")
+	 public void Click_Change_Store_options(String statusupdate) 
+	 {
+		 bbhomepage.clickOnChangeStore(statusupdate);
+	 }
+	 
+	 @Then ("user update receiving store {string}")
+	 public void user_update_receiving_Store(String receivingstore) 
+	 {
+		 bbhomepage.seletReceivingStore(receivingstore);
+	 }
+	 
 	 @Then("click on Advance Search Status Dropdown with {string}")
 	 public void Click_advancesearch_dropdown(String missing) throws InterruptedException 
 	 {
