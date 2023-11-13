@@ -35,7 +35,7 @@ Feature: Validation of B2B File Upload for a New Order
 
     Examples: 
       | User                    | ManageNewItem    | ManageExpiredItem    | path                                              |
-      | ari.kumari@storelens.com | Manage new items | Manage expired items |C:\Users\hcladmin\Desktop\B2bTemplateV7_0037.xlsx |
+      | ari.kumari@storelens.com | Manage new items | Manage expired items |C:\Users\hcladmin\Desktop\B2bTemplateV7_0038.xlsx |
 
 @11878
  Scenario Outline: Validation of duplicate item detail while uploading B2B File for new order
@@ -58,10 +58,12 @@ Feature: Validation of B2B File Upload for a New Order
       
    Examples: 
       | User                    | ManageNewItem    | ManageExpiredItem    | path                                              |
-      | ari.kumari@storelens.com | Manage new items | Manage expired items |C:\Users\hcladmin\Desktop\B2bTemplateV7_0036.xlsx |
+      | ari.kumari@storelens.com | Manage new items | Manage expired items |C:\Users\hcladmin\Desktop\B2bTemplateV7_0038.xlsx |
          
 @11876
   Scenario Outline: Validation of B2B File Upload functionality for HM Flamingo
+  When user navigating to B2BAppHomePage with valid credentials and signin
+    Then user validate text "Flamingo"
     Then validate B2B entity "<ManageNewItem>" and "<ManageExpiredItem>"
     Then verify all entities are appearing under Manage new items
       |NEW ORDERS - PENDING|Create orders & scan parcel ID|SENDING - IN TRANSIT|Send items to store|RECEIVING - IN TRANSIT|Receive items from store|
@@ -69,7 +71,7 @@ Feature: Validation of B2B File Upload for a New Order
       | Home | New order | Items | Orders | 
     And click on New Order button
     Then navigate to New Order
-    When user navigating to B2BAppHomePage with valid credentials and signin
+     And user validate and select Receiving Store "H&M Regent Street(GB0660)" from Receiving Store dropdown
     And click on upload file to excel "<path>" and Click on done button
     Then validate the field data with entities "<path>"
       | Item ID | B2bItemID | Item Name | Gender | Category (Lookup) | Size (Lookup) | Color | Material | Pattern | Condition | PriceNew | Brand | Article Number |
@@ -92,5 +94,7 @@ Feature: Validation of B2B File Upload for a New Order
 
     Examples: 
       | User                    | ManageNewItem    | ManageExpiredItem    | path                                              |
-      | ari.kumari@storelens.com | Manage new items | Manage expired items |C:\Users\hcladmin\Desktop\B2bTemplateV7_0036.xlsx |
-      
+      | ari.kumari@storelens.com | Manage new items | Manage expired items |C:\Users\hcladmin\Desktop\HM_ES_TREND_13102023_002.xlsx |
+     
+     
+ 

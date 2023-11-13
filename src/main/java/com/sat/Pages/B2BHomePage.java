@@ -126,6 +126,29 @@ public class B2BHomePage {
 	@FindBy(xpath ="//div[@data-control-name='btnAdvSearch']//div[text()='SEARCH']")
 	private WebElement AdvanceSearchbtn;
 	
+	@FindBy(xpath ="//div[@data-control-name='lblHeaderTopMAS_22']")
+	private WebElement actionNeeded;
+	
+	@FindBy(xpath ="//div[@data-control-name='lblHeaderTopMAS_7']")
+	private WebElement b2b;
+	
+	@FindBy(xpath ="//div[@data-control-name='lblCustomerServicePhoneBSS_17']")//div[@data-control-name='Container1_24']
+	private WebElement inTransitReceiving;
+	
+	@FindBy(xpath ="//div[@data-control-name='lblCustomerServicePhoneBSS_18']")//div[@data-control-name='Container1_25']
+	private WebElement expiredB2B;
+	
+	@FindBy(xpath ="//div[@data-control-name='lblCustomerServicePhoneBSS_19']")//div[@data-control-name='Container1_26']
+	private WebElement inTransitSendinging;
+	
+	@FindBy(xpath = "//div[@data-control-name='ddStore_3']")
+	private WebElement receivingStoreList;
+	
+	@FindBy(xpath = "//*[text()='OK']/parent::div")
+	private WebElement okButton;
+	
+	
+	//div[@data-control-name='Container1_24']
 	String Order_no_expected=null;
 	String Order_no_actual=null;
 	
@@ -180,6 +203,85 @@ public class B2BHomePage {
 		assertTrue(actual.equalsIgnoreCase(heading));
 		Wait.untilPageLoadComplete(driver, 30);
 		
+	}
+	
+	public void validateResaleAppB2BPageHeading(String heading)
+	{
+		String actual=driver.findElement(By.xpath("(//*[text()='"+heading+"'])")).getText();
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(actual.equalsIgnoreCase(heading));
+		Wait.untilPageLoadComplete(driver, 30);
+		
+	}
+	
+	public void validateB2BandActionNeededText(String text1,String text2)
+	{
+		String actualText2 =actionNeeded.getText();
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(actualText2.equalsIgnoreCase(text2));
+		Wait.untilPageLoadComplete(driver, 30);
+		
+		String actualText1 =b2b.getText();
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(actualText1.equalsIgnoreCase(text1));
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void validateInTransitReceivingCount(String text)
+	{
+		System.out.println("Clicking on In Transit Receiving ");
+  		Wait.untilPageLoadComplete(driver, 5);
+  		Wait.elementToBeClickable(driver, inTransitReceiving, 5);
+  		testutil.actionMethodClick(driver, inTransitReceiving);
+		
+//		String actual=inTransitReceiving.getText();
+//		Wait.untilPageLoadComplete(driver, 30);
+//		assertTrue(actual.equalsIgnoreCase(text));
+//		Wait.untilPageLoadComplete(driver, 30);
+//		inTransitReceiving.click();
+  		
+		Wait.untilPageLoadComplete(driver, 30);
+		String order=driver.findElement(By.xpath("//div[@data-control-name='txtStoreContactEmailBSS_15']")).getText();
+		System.out.println("Receiving Order is "+order);
+		Wait.untilPageLoadComplete(driver, 30);
+		
+	}
+	
+	public void validateExpiredB2BCount(String text)
+	{
+		System.out.println("Clicking on expired B2B ");
+  		Wait.untilPageLoadComplete(driver, 5);
+  		Wait.elementToBeClickable(driver, expiredB2B, 5);
+  		testutil.actionMethodClick(driver, expiredB2B);
+  		
+  		Wait.untilPageLoadComplete(driver, 30);
+		String order=driver.findElement(By.xpath("//div[@data-control-name='txtStoreContactEmailBSS_16']")).getText();
+		System.out.println("Receiving Order is "+order);
+		Wait.untilPageLoadComplete(driver, 30);
+
+	}
+	
+	public void validateSendingCount(String text)
+	{
+		System.out.println("Clicking on In Transit Sendinging ");
+  		Wait.untilPageLoadComplete(driver, 5);
+  		Wait.elementToBeClickable(driver, inTransitSendinging, 5);
+  		//IntransitReceiving.click();
+  		testutil.actionMethodClick(driver, inTransitSendinging);
+  		
+  		Wait.untilPageLoadComplete(driver, 30);
+		String order=driver.findElement(By.xpath("//div[@data-control-name='txtStoreContactEmailBSS_17']")).getText();
+		System.out.println("Receiving Order is "+order);
+		Wait.untilPageLoadComplete(driver, 30);
+  		
+//		String actual=inTransitSendinging.getText();
+//		Wait.untilPageLoadComplete(driver, 30);
+//		assertTrue(actual.equalsIgnoreCase(text));
+//		Wait.untilPageLoadComplete(driver, 30);
+//		inTransitSendinging.click();
+//		Wait.untilPageLoadComplete(driver, 30);
+//		//driver.navigate().refresh();
+//		Wait.untilPageLoadComplete(driver, 30);
 	}
 	
 	public void verfyWarningForDuplicateDetail()
@@ -289,6 +391,18 @@ public void Click_new_order() {
   //  buttons.click();
 	//assertTrue(buttons.size()>0,"Click new order Button is not displayed");
 }
+
+public void Click_on_order() {
+	WebElement buttons=driver.findElement(By.xpath("(//div[@data-control-name='imgMenuIcn'])[4]"));
+	
+   // WebElement ele= buttons.get(0).click();
+    Wait.untilPageLoadComplete(driver);
+    Wait.elementToBeClickable(driver, buttons, 10);
+    testutil.actionMethodClick(driver, buttons);
+  //  buttons.click();
+	//assertTrue(buttons.size()>0,"Click new order Button is not displayed");
+}
+
 public void Click_order() {
     Wait.untilPageLoadComplete(driver);
     Wait.elementToBeClickable(driver, order_button, 10);
@@ -592,8 +706,7 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
 		
 		public void validate_actionneeded(String actionneed,DataTable datatable) throws InterruptedException 
 		{
-			 
-			{
+			//{
 				List<String> actual = datatable.asList();
 				System.out.println("Size = "+ actual.size());
 				for (int i = 0; i <= actual.size()-1; i++) {
@@ -613,7 +726,7 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
 			            	}
 			}
 		}
-		}
+		//}
 	  public void Sending_Intransit_resaleapp()
 		{
 		
@@ -641,8 +754,8 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
        	{
        		System.out.println( "This is Expected:  "+data.getText()+" is not equal "+" This is Actual  "+actual.get(i));
        	}
-}
 	  }
+    }
 		public void ValidateSendingandreceivingcount()
 		  {
 		 	WebElement sendingbutton=driver.findElement(By.xpath("//div[@data-control-name='lblTabItemsIS_2']//div[contains(text(),'Sending')]"));
@@ -724,7 +837,41 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
       		testutil.actionMethodClick(driver, IntransitReceiving);
       		
     		}
-		  
+		
+  		public void threedots_click_validate_fields_in_B2BApp(DataTable datatable) throws InterruptedException
+		  {	
+  			System.out.println("Clicking on three dots in Order Page");
+        		List<WebElement> expanddotstransit = driver
+      				.findElements(By.xpath("(//div[@data-control-name='icnMoreOptionsPS_3'])[1]"));
+      		if (!expanddotstransit.isEmpty()) {
+      			if (expanddotstransit.get(0).isDisplayed()) {
+      				expanddotstransit.get(0).click();
+      			} else {
+      				System.out.println("element not visible");
+      			}
+      		}
+      		System.out.println("Validate Remove order and Change store options are present");
+      		
+      		List<String> actual = datatable.asList();
+  			System.out.println("Size = "+ actual.size());
+  			for (int i = 0; i <= actual.size()-1; i++) {
+  	        	
+  		                 String content = actual.get(i);
+  		                Thread.sleep(2000);
+  		            	WebElement data=driver.findElement(By.xpath("(//div[contains(text(),'"+content+"')])[1]"));
+  		            	System.out.println("Data Contain : "+data.getText());
+  		            	
+  		            	if(actual.get(i).equalsIgnoreCase(data.getText()))
+  		            	{
+  		            		System.out.println("This is Expected:" + data.getText()+" == "+" This is Actual:  "+actual.get(i));
+  		            	}
+  		            	else
+  		            	{
+  		            		System.out.println( "This is Expected  "+data.getText()+" is not equal "+"This is Actual  "+actual.get(i));
+  		            	}
+  		}
+		  }
+		
     		public void threedots_click_validate_fields(DataTable datatable) throws InterruptedException
   		  {	
     			System.out.println("Clicking on three dots in In-transit receiving");
@@ -758,6 +905,43 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
     		            	}
     		}
   		  }
+    		
+    		public void clickOnChangeStore(String statusupdate) 
+			  {
+				System.out.println("Clicking on Change Store or Remove Store status ");
+	      		Wait.untilPageLoadComplete(driver, 5);
+	      		WebElement Statusbtn = driver.findElement(By.xpath("//div[text()='"+statusupdate+"']"));
+	      		Wait.elementToBeClickable(driver, Statusbtn, 5);
+	      		testutil.actionMethodClick(driver, Statusbtn);
+			  }
+    		
+    		public void seletReceivingStore(String receivingstore)
+    		{
+    			Wait.elementToBeClickable(driver, receivingStoreList, 10);
+    			receivingStoreList.click();
+    			WebElement storeSelection = driver.findElement(By.xpath("//div[contains(@id,'appmagic-dropdownFlyoutdropdown_siena_') and contains(text(),'" + receivingstore + "')]"));
+    			String storeSelectionvalue = storeSelection.getText();
+    			Wait.waitForInvisibilityOfElement(driver, storeSelection, 5);
+    			Wait.waitForInvisibilityOfElementLocated(driver, storeSelection, 5);
+    			Wait.elementToBeClickable(driver, storeSelection, 5);
+    			List<WebElement> ele = driver.findElements(By.xpath("//div[contains(text(),'" + receivingstore + "') and contains(@class,'appmagic-dropdownListItem')]"));
+    			Boolean flag = false;
+    			while (!flag) {
+    				for (int i = 0; i < ele.size(); i++) {
+    					if (isClickable(ele.get(i))) {
+    						// ele.get(i).click();
+    						util.actionMethodClick(driver, ele.get(i));
+    						flag = true;
+    						i = ele.size();
+    					}
+    				}
+    				Wait.elementToBeClickable(driver, okButton, 5);
+    				util.actionMethodClick(driver, okButton);
+
+    			}
+    		}
+    		
+    		
     			public void clickOnMissing(String statusupdate) 
     			  {
     				System.out.println("Clicking on Missing or Broken status ");
