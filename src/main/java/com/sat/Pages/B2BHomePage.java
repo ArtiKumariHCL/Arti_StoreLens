@@ -2,7 +2,7 @@ package com.sat.Pages;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
+import com.sat.Pages.AdvancedSearchPage;
 import java.awt.AWTException;
 
 import java.awt.Robot;
@@ -39,6 +39,7 @@ import org.testng.Assert;
 import com.sat.config.ConfigFileReader;
 import com.sat.testUtil.Testutil;
 import com.sat.testUtil.Wait;
+import com.sat.testbase.TestBase;
 
 import io.cucumber.datatable.DataTable;
 
@@ -46,7 +47,7 @@ public class B2BHomePage {
 	String getdateformate;
 	private WebDriver driver;
 	private ConfigFileReader config = new ConfigFileReader();
-
+	private AdvancedSearchPage adv = new AdvancedSearchPage(TestBase.getDriver());
 	
 	@FindBy(xpath ="//div[@data-control-name='lbl_NewItems_1']")
 	private WebElement validManageNewItem;
@@ -84,8 +85,14 @@ public class B2BHomePage {
 	@FindBy(xpath ="//input[@appmagic-control='txt_ParcelID_PS_automanualtextbox']")
 	private WebElement parcelNumber;
 	
+	@FindBy(xpath ="//input[@appmagic-control='txt_ParcelID_PS_automanual_2textbox']")
+	private WebElement parcelNumber2;
+	
 	@FindBy(xpath ="//div[text()='DONE']/ancestor::div[@data-control-name='btn_Next_Pending_Item_PS']")
 	private WebElement parcelIDDone;
+	
+	@FindBy(xpath ="//div[text()='DONE']/ancestor::div[@data-control-name='btn_Save_View_Item_HS_3']")
+	private WebElement parcelIDDoneB2B;
 	
 	@FindBy(xpath ="//div[@data-control-name='lbl_Pending_Count_HS_1']")
 	private WebElement countElementtransit;
@@ -147,15 +154,42 @@ public class B2BHomePage {
 	@FindBy(xpath = "//*[text()='OK']/parent::div")
 	private WebElement okButton;
 	
+	@FindBy(xpath ="//div[@data-control-name='Label4_26']")
+	private WebElement receivingIntransitB2B;
 	
-	//div[@data-control-name='Container1_24']
+	@FindBy(xpath ="(//div[@data-control-name='lblItemsHeader_PS_Item_2'])[1]")
+	private WebElement parcelId;
+	
+	@FindBy(xpath ="(//div[@data-control-name='imgMenuIcn'])[4]")
+	private WebElement orderPage;
+	
+	@FindBy(xpath ="(//div[@data-control-name='imgMenuIcn'])[3]")
+	private WebElement itemPage;
+	
+	@FindBy(xpath ="//div[@data-control-name='ddTypeOptions']")
+	private WebElement optionDropDown;
+	
+	@FindBy(xpath ="//div[@data-control-name='ddOrderStatus']")
+	private WebElement statusDropDown;
+	
+	@FindBy(xpath ="//input[@appmagic-control='txtSearchOrder_2textbox']")
+	private WebElement searchTextBox;
+	
+	@FindBy(xpath ="//div[@data-control-name='lblOrderHeaderMIS']")
+	private WebElement orderNumber;
+	
+	@FindBy(xpath ="(//div[@data-control-name='lblPriceMIS'])[1]")
+	private WebElement priceCurrency;
+	
+	
 	String Order_no_expected=null;
 	String Order_no_actual=null;
-	
+	String parcelIdtext=null;
 	List<String> columnNames;
 	Wait waits = new Wait();
 	Testutil util = new Testutil();
 	Testutil testutil = new Testutil();
+	
 	public B2BHomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -195,6 +229,41 @@ public class B2BHomePage {
 		assertTrue(expectedExpired.contains(ManageExpiredItem),"Manage expired item same");
 
 	}
+	
+	public void validateOrderNumber(String actualColName) {
+		String exceptedColName = orderNumber.getAttribute("InnerText");
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(exceptedColName.equalsIgnoreCase(actualColName));
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	
+	 public void selectOption(String option)
+	    {
+	    	Wait.untilPageLoadComplete(driver, 30);
+	    	optionDropDown.click();
+	    	Wait.untilPageLoadComplete(driver, 30);
+	    	driver.findElement(By.xpath("(//*[text()='"+option+"'])[2]")).click();
+	    	Wait.untilPageLoadComplete(driver, 30);
+	    	
+	    }
+	 public void selectStatus(String status)
+	    {
+	    	Wait.untilPageLoadComplete(driver, 30);
+	    	statusDropDown.click();
+	    	Wait.untilPageLoadComplete(driver, 30);
+	    	driver.findElement(By.xpath("//*[text()='"+status+"']")).click();
+	    	Wait.untilPageLoadComplete(driver, 30);
+	    	
+	    }
+	 public void searchTextBox(String text)
+		{
+			Wait.untilPageLoadComplete(driver, 30);
+			searchTextBox.click();
+			Wait.untilPageLoadComplete(driver, 30);
+			searchTextBox.sendKeys(text);
+			Wait.untilPageLoadComplete(driver, 30);
+		}
 	
 	public void validateHeading(String heading)
 	{
@@ -392,15 +461,20 @@ public void Click_new_order() {
 	//assertTrue(buttons.size()>0,"Click new order Button is not displayed");
 }
 
-public void Click_on_order() {
-	WebElement buttons=driver.findElement(By.xpath("(//div[@data-control-name='imgMenuIcn'])[4]"));
+public void Click_on_order_page() {
 	
-   // WebElement ele= buttons.get(0).click();
     Wait.untilPageLoadComplete(driver);
-    Wait.elementToBeClickable(driver, buttons, 10);
-    testutil.actionMethodClick(driver, buttons);
-  //  buttons.click();
-	//assertTrue(buttons.size()>0,"Click new order Button is not displayed");
+    Wait.elementToBeClickable(driver, orderPage, 10);
+    testutil.actionMethodClick(driver, orderPage);
+  
+}
+
+public void Click_on_item_page() {
+	
+    Wait.untilPageLoadComplete(driver);
+    Wait.elementToBeClickable(driver, itemPage, 10);
+    testutil.actionMethodClick(driver, itemPage);
+  
 }
 
 public void Click_order() {
@@ -553,6 +627,30 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
 					parcelIDDone.click();
 					Wait.waitForInvisibilityOfElement(driver, parcelIDDone, 5);
 			}
+			
+			public void generate_parcelId_B2BApp() throws AWTException, InterruptedException
+			{
+				Robot robot = new Robot();
+		        System.out.println("About to zoom in");
+					for (int i = 0; i < 4; i++) {
+			            robot.keyPress(KeyEvent.VK_CONTROL);
+			            robot.keyPress(KeyEvent.VK_SUBTRACT);
+						robot.keyRelease(KeyEvent.VK_SUBTRACT);
+						robot.keyRelease(KeyEvent.VK_SUBTRACT);
+			            robot.keyRelease(KeyEvent.VK_CONTROL);
+					}
+					System.out.println("Trying to create unique id manually");
+				 	util.actionMethodClick(driver, addparcelIdManually);
+				 	parcelIdtext=parcelId.getText();
+					System.out.println("random number is:" + parcelIdtext);
+					Wait.waitUntilElementVisible(driver, parcelNumber2);
+					parcelNumber2.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+					parcelNumber2.sendKeys(parcelIdtext);
+					parcelNumber2.sendKeys(Keys.ENTER);
+					parcelIDDoneB2B.click();
+					Wait.waitForInvisibilityOfElement(driver, parcelIDDoneB2B, 5);
+			}
+			
 			public void Click_homebtn() {
 				WebElement buttons=driver.findElement(By.xpath("(//div[@data-control-name='imgMenuIcn'])[1]"));
 			    Wait.elementToBeClickable(driver, buttons, 10);
@@ -756,7 +854,56 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
        	}
 	  }
     }
-		public void ValidateSendingandreceivingcount()
+	  
+	  public void Validate_All_Sending_and_receiving(String tab,DataTable datatable)
+	  {
+	  System.out.println("Following field are present in "+tab);
+		List<String> actual = datatable.asList();
+		System.out.println("Size = "+ actual.size());
+		for (int i = 0; i <= actual.size()-1; i++) {
+        	
+            String content = actual.get(i);
+        //   Thread.sleep(2000);
+       	WebElement data=driver.findElement(By.xpath("//div[@data-control-name='lblTabItemsIS_1']//div[contains(text(),'"+content+"')]"));
+       	System.out.println("Data Contain : under "+ tab +" is "+data.getText());
+       	data.click();
+       	
+       	if(actual.get(i).equalsIgnoreCase(data.getText()))
+       	{
+       		System.out.println("This is Expected: " + data.getText()+" == "+" This is Actual:  "+actual.get(i));
+       	}
+       	else
+       	{
+       		System.out.println( "This is Expected:  "+data.getText()+" is not equal "+" This is Actual  "+actual.get(i));
+       	}	
+	}
+  }
+	
+	public void validate_active_and_archive(String tab,DataTable datatable)
+	  {
+	  System.out.println("Following field are present in "+tab);
+		List<String> actual = datatable.asList();
+		System.out.println("Size = "+ actual.size());
+		for (int i = 0; i <= actual.size()-1; i++) {
+        	
+            String content = actual.get(i);
+        //   Thread.sleep(2000);
+       	WebElement data=driver.findElement(By.xpath("//div[@data-control-name='lblTabItemsIS_3']//div[contains(text(),'"+content+"')]"));
+       	System.out.println("Data Contain : under "+ tab +" is "+data.getText());
+       	data.click();
+       	
+       	if(actual.get(i).equalsIgnoreCase(data.getText()))
+       	{
+       		System.out.println("This is Expected: " + data.getText()+" == "+" This is Actual:  "+actual.get(i));
+       	}
+       	else
+       	{
+       		System.out.println( "This is Expected:  "+data.getText()+" is not equal "+" This is Actual  "+actual.get(i));
+       	}	
+	}
+  }
+	  
+ public void ValidateSendingandreceivingcount()
 		  {
 		 	WebElement sendingbutton=driver.findElement(By.xpath("//div[@data-control-name='lblTabItemsIS_2']//div[contains(text(),'Sending')]"));
 		if(sendingbutton.isDisplayed()) {
@@ -838,6 +985,16 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
       		
     		}
 		
+		public void receiving_In_transit_B2BApp() throws InterruptedException
+		  {
+			System.out.println("Clicking on In-transit receiving ");
+    		Wait.untilPageLoadComplete(driver, 5);
+    		Wait.elementToBeClickable(driver, receivingIntransitB2B, 5);
+    		//IntransitReceiving.click();
+    		testutil.actionMethodClick(driver, receivingIntransitB2B);
+    		
+  		}
+		
   		public void threedots_click_validate_fields_in_B2BApp(DataTable datatable) throws InterruptedException
 		  {	
   			System.out.println("Clicking on three dots in Order Page");
@@ -906,9 +1063,43 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
     		}
   		  }
     		
+    		public void threedots_click_validate_fields_Parcel(DataTable datatable) throws InterruptedException
+    		  {	
+      			System.out.println("Clicking on three dots in Receive Parcep Page");
+            		List<WebElement> expanddotstransit = driver
+          				.findElements(By.xpath("//div[@data-control-name='icnNewStatus']"));
+          		if (!expanddotstransit.isEmpty()) {
+          			if (expanddotstransit.get(0).isDisplayed()) {
+          				expanddotstransit.get(0).click();
+          			} else {
+          				System.out.println("element not visible");
+          			}
+          		}
+          		System.out.println("Validate Missing & Broken Field present");
+          		
+          		List<String> actual = datatable.asList();
+      			System.out.println("Size = "+ actual.size());
+      			for (int i = 0; i <= actual.size()-1; i++) {
+      	        	
+      		                 String content = actual.get(i);
+      		                Thread.sleep(2000);
+      		            	WebElement data=driver.findElement(By.xpath("(//div[contains(text(),'"+content+"')])[1]"));
+      		            	System.out.println("Data Contain : "+data.getText());
+      		            	
+      		            	if(actual.get(i).equalsIgnoreCase(data.getText()))
+      		            	{
+      		            		System.out.println("This is Expected:" + data.getText()+" == "+" This is Actual:  "+actual.get(i));
+      		            	}
+      		            	else
+      		            	{
+      		            		System.out.println( "This is Expected  "+data.getText()+" is not equal "+"This is Actual  "+actual.get(i));
+      		            	}
+      		}
+    		  }
+    		
     		public void clickOnChangeStore(String statusupdate) 
 			  {
-				System.out.println("Clicking on Change Store or Remove Store status ");
+				System.out.println("Clicking on Missing or Broken option ");
 	      		Wait.untilPageLoadComplete(driver, 5);
 	      		WebElement Statusbtn = driver.findElement(By.xpath("//div[text()='"+statusupdate+"']"));
 	      		Wait.elementToBeClickable(driver, Statusbtn, 5);
@@ -974,7 +1165,44 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
     	    		
     	    		
     			  }
-    			public void clickOnadvanceSearchstatus(String missing) throws InterruptedException 
+    			
+   public void clickOnYesButton()
+   {
+	   Boolean flag = false;
+		while (!flag) {
+			List<WebElement> yesbtn = driver.findElements(By.xpath("//div[@data-control-name='btnOkConfirmCancelAddItemDetailsMIS_5']//div[text()='YES']"));
+			for (int i = 0; i < yesbtn.size(); i++){
+				if (isClickable(yesbtn.get(i))) {
+					// ele.get(i).click();
+					Wait.elementToBeClickable(driver, yesbtn.get(i), 5);
+					System.out.println(yesbtn.get(i));
+					util.actionMethodClick(driver, yesbtn.get(i));
+					flag = true;
+					i = yesbtn.size();
+				}
+
+			}
+		}
+   }
+   
+   public void enterTextInSearchBoxInB2B()
+	{
+		Wait.untilPageLoadComplete(driver, 90);
+		WebElement searchbox=driver.findElement(By.xpath("//input[@appmagic-control='txtSearchOrder_2textbox']"));
+		Wait.elementToBeClickable(driver, searchbox, 3);
+		//searchbox.sendKeys(text,Keys.ENTER);
+		System.out.println("random number is:" + parcelIdtext);
+		searchbox.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+		//searchbox.sendKeys(String.valueOf(parcelId.getText()));
+		searchbox.sendKeys(parcelIdtext);
+		searchbox.sendKeys(Keys.ENTER);
+		Wait.untilPageLoadComplete(driver, 90);
+//		searchTextBox.sendKeys(text);
+		Wait.untilPageLoadComplete(driver, 90);
+		
+	}
+    	
+   public void clickOnadvanceSearchstatus(String missing) throws InterruptedException 
   			  {
     				Wait.elementToBeClickable(driver, AdvanceStatusClick, 5);
     				AdvanceStatusClick.click();
@@ -1000,6 +1228,22 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
 	            		System.out.println( "This is Expected  "+Order_no_expected+" is not equal "+"This is Actual  "+Order_no_actual);
 	            	}
     			  }
+    			
+      public void validatePriceCurrency(String expectedCurrency) throws InterruptedException {
+    	  Thread.sleep(5000);
+			String actualPriceCurrency = priceCurrency.getText();
+			System.out.println(actualPriceCurrency);
+			if(expectedCurrency.contains("£"))
+					{
+				System.out.println("This is Expected:" + expectedCurrency+" == "+" This is Actual:  "+actualPriceCurrency);
+	            	}
+	            	else
+	            	{
+	            		System.out.println( "This is Expected  "+expectedCurrency+" is not equal "+"This is Actual  "+actualPriceCurrency);
+	            	}
+					}
+    	  
+      
 }
 
     			

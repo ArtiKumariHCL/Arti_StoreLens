@@ -3,6 +3,7 @@ package com.sat.StepDefinitions;
 import com.sat.Pages.AdvancedSearchPage;
 import com.sat.Pages.PowerAppsAutomateFlowPage;
 import com.sat.Pages.ResaleAppLoginPage;
+import com.sat.Pages.StatusUpdatePage;
 import com.sat.testbase.TestBase;
 
 import io.cucumber.datatable.DataTable;
@@ -13,7 +14,70 @@ public class AdvancedSearchStepDef {
 		
 	private AdvancedSearchPage advancedSearch = new AdvancedSearchPage(TestBase.getDriver());
 	private PowerAppsAutomateFlowPage powerApps= new PowerAppsAutomateFlowPage(TestBase.getDriver());
+	private StatusUpdatePage statusupdate= new StatusUpdatePage(TestBase.getDriver());
 	
+	@Then("user click on Status update tab from left pane")
+	public void user_click_on_tab_from_left_pane() {
+		try {
+			statusupdate.clickOnStatusTab();
+		} catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user click on Manage users tab from left pane")
+	public void user_click_on_ManageUsers_from_left_pane() {
+		try {
+			statusupdate.clickOnManageUsersTab();
+		} catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user search {string} in status update page")
+	public void user_search_itemId(String itemid) {
+		try {
+			statusupdate.searchforItemID(itemid);
+		} catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user click on {string} in status update page")
+	public void user_click_itemId(String itemid) {
+		try {
+			statusupdate.openIteminStatusPage(itemid);
+		} catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user change status of an item {string}")
+	public void user_change_status_of_item(String status) {
+		try {
+			statusupdate.changeStatus(status);
+		} catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("click on update button")
+	public void user_click_on_update_button() {
+		try {
+			statusupdate.clickOnUpdate();
+		} catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
+	
+	@Then("user validate regular seller can not change status of Archive item")
+	public void user_validate_regular_seller_can_not_change_status_of_archive_item() {
+		try {
+			statusupdate.validationOfRegularSeller();
+		} catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+	}
 	
 	@And("click on the Advanced Search in All Items page")
 	public void click_on_the_advanced_search_in_all_items_page() {
@@ -142,6 +206,26 @@ public class AdvancedSearchStepDef {
         }
 	}
 	
+	@Then("user validate column name {string} in all pages")
+	public void user_validate_column_name_in_all_pages(String string) {
+		try {
+			advancedSearch.validateB2bColAllItem(string);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+		
+	}
+	
+	@Then("user validated column name {string} in all pages")
+	public void user_validated_column_name_in_all_pages(String string) {
+		try {
+			advancedSearch.validateB2bColInstore(string);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+		
+	}
+	
 	@Then("user entered Brand as {string} in Brand textbox")
 	public void user_enterd_InStore_Brand_as_in_Brand_textbox(String string) {
 		try {
@@ -179,6 +263,31 @@ public class AdvancedSearchStepDef {
         } catch (Exception e) {
             System.out.println("Exception :" + e + " has occurred");
         }}
+	
+	@Then("user enter B2BSeller as {string} in B2BSeller textbox")
+	public void user_enter_B2BSeller_as_in_B2BSeller_textbox(String string) {
+		try {
+			advancedSearch.enterB2bSeller(string);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }}
+	
+	@Then("user entered B2BSeller as {string} in B2BSeller textbox")
+	public void user_entered_B2BSeller_as_in_B2BSeller_textbox(String string) {
+		try {
+			advancedSearch.enterB2bSellerInstore(string);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }}
+	
+	@Then("user enter itemId as {string} in textbox")
+	public void user_enter_itemId_as_in_textbox(String string) {
+		try {
+			advancedSearch.enterItemId(string);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }}
+		
 		
 
 	@Then("user select category {string} from category dropdown")
@@ -458,9 +567,28 @@ public class AdvancedSearchStepDef {
     } catch (Exception e) {
         System.out.println("Exception :" + e + " has occurred");
     }
-		
 	}
 
+	@Then("user click on checkbox and select item for all item page")
+	public void user_click_on_checkbox_and_select_item_for_all_item_page() throws InterruptedException {
+		//try {
+		
+		advancedSearch.ClickOnCheckboxOnAllItemPage();
+//    } catch (Exception e) {
+//        System.out.println("Exception :" + e + " has occurred");
+//    }
+	}
+	
+	@Then("user click on Return To Seller button")
+	public void user_click_on_Return_To_seller_item_for_all_item_page() throws InterruptedException {
+		//try {
+		
+		advancedSearch.ClickOnReturnToSeller();
+//    } catch (Exception e) {
+//        System.out.println("Exception :" + e + " has occurred");
+//    }
+	}
+	
 	@Then("user click on three dot")
 	public void user_click_on_three_dot() {
 		try {
@@ -533,6 +661,40 @@ public class AdvancedSearchStepDef {
 	public void user_run_cloudflow_job() {
 		powerApps.executeCloudFlow();
 	}
-
 	
+	@Then("click on next button on Return To Seller page")
+	public void user_click_on_next_on_return_to_seller_page() {
+		try {
+		advancedSearch.next_button_ReturnToSeller();
+		} catch (Exception e) {
+	        System.out.println("Exception :" + e + " has occurred");
+	    }
+	}
+	
+	@Then("Click on Scan parcel button on Return To Seller page")
+	public void click_on_scan_parcel_on_return_to_seller_page() {
+		try {
+		advancedSearch.scan_parcel_Return_To_Seller();
+		} catch (Exception e) {
+	        System.out.println("Exception :" + e + " has occurred");
+	    }
+	}
+	
+	@Then("Generate the unique parcel ID and click on done on Return To Seller page")
+	public void generate_unique_parcel_id_on_return_to_seller_page() {
+		try {
+		advancedSearch.generate_parcelId_Return_To_Seller();
+		} catch (Exception e) {
+	        System.out.println("Exception :" + e + " has occurred");
+	    }
+	}
+	
+	@Then("user click on ok and validate order id")
+	public void click_on_ok_and_validate_order_id_on_all_item_page() {
+		try {
+		advancedSearch.validateOrderId();
+		} catch (Exception e) {
+	        System.out.println("Exception :" + e + " has occurred");
+	    }
+	}
 }

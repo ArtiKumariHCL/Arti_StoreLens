@@ -1,30 +1,38 @@
-@US11879
-Feature: Validation of Add Purchase Price for B2B Seller and Normal Seller
+@US11532
+Feature: Validation on the store side for Weekdays, UK,GB0977,GB0989 and H&M, Spain,ES000000
 
-  Background: 
-    When user navigating to ResaleApp with valid credentials and signin
-
-  Scenario Outline: Validation of Add Purchase Price for B2B Seller and Normal Seller
+  #Background: 
+    #When user navigating to ResaleApp with valid credentials and signin
+@Weekdays
+  Scenario Outline: Validation the store side for Weekdays, UK,GB0977
+  When user navigating to ResaleApp with valid credentials and signin
     And select "<Brand>","<Country>","<Store>"
-    Then user click on "All Sellers" pages
-    Then user click on "SHOW ALL SELLERS" pages
-    Then user click on "B2B Sellers only" pages
-    And user enter seller name as "Arti" in search textbox
-    Then user click on seller name from result grid
-    And click on AddItem button and enter "<Number of Items>", select "<Unsold Item>" and click Next button and enter sign save it
-    And Open the "<status>" item and validate
-    Then validated Purchses Price text Box should be display for B2B Seller
-    Then user click on "All Sellers" pages
-    Then user click on "SHOW ALL SELLERS" pages
-    And user enter seller name as "Arti" in search textbox
-    Then user click on seller name from result grid
-    And click on AddItem button and enter "<Number of Items>", select "<Unsold Item>" and click Next button and enter sign save it
-    And Open the "<status>" item and validate
-    #And click on "<status>" item and generate id by clicking on edit button and save it
-    Then validated Purchses Price text Box should not be display for Normal Seller
+    And user scroll into "B2B"
+    Then User navigated to "<B2Btab>" tab
+    Then user validate text "WEEKDAY / RESALE / WEEKDAY SOHO" in Resale App B2B page
+    Then user validate text "B2B" and "Action needed"
+    Then validate under "<ActionNeeded>" following Entity
+      | EXPIRED B2B | IN TRANSIT RECEIVING | IN TRANSIT SENDING |
+      Then Click on In-Transit Receiving
+      #And validate the count for Sending and receiving count
+    #And user click on receiving count and validate text "IN TRANSIT RECEIVING"
+     And validate the following field are present in "<B2Btab>"
+      | Sending | Receiving |
+      And validate the count for Sending and receiving count
+    Then User navigated to "<B2Btab>" tab
+    And user click on sending count and validate text "IN TRANSIT SENDING"
+     And validate the following field are present in "<B2Btab>"
+      | Sending | Receiving |
+       Then User navigated to "<B2Btab>" tab
+    And user click on expired count and validate text "EXPIRED B2B"
+    Then User navigated to "<B2Btab>" tab
+    Then user validate text "Sales data"
+    Then user validate text "Items - number of sold items in Top 5 Categories"
+    Then validate Sales data display latest five top categories details
 
     Examples: 
-      | Brand   | Country | Store                     | Number of Items | Unsold Item | status  |
-      | WEEKDAY | Sweden  | Drottninggatan 63(SE0655) |               1 | Pickup      | Pending |
-
-  
+      | Brand | Country | Store                         | B2Btab |
+     #| WEEKDAY | United Kingdom | Weekday Soho(GB0989)  |B2B    | 
+      | WEEKDAY | United Kingdom | Weekday Shoreditch(GB0977)  |B2B    |
+   
+ 

@@ -4,7 +4,8 @@
 Feature: B2B validation under store side
 
   Scenario Outline: B2B validation under store side
-    When user navigating to ResaleAppHomePage with valid credentials and signin
+   When user navigating to ResaleApp with valid credentials and signin
+    #When user navigating to ResaleAppHomePage with valid credentials and signin
     When selecting "<Brand>","<Country>","<Store>"
     Then validate under "<ActionNeeded>" following Entity
       | EXPIRED B2B | IN TRANSIT RECEIVING | IN TRANSIT SENDING |
@@ -18,4 +19,5 @@ Feature: B2B validation under store side
 
     Examples: 
       | Brand | Country | Store                        | User                    | ManageNewItem    | ManageExpiredItem    | ActionNeeded  | path                                              | tab        | B2Btab |
-      | H&M   | Spain   | Passeig de Gràcia 11(ES0200) | swetha.pr@storelens.com | Manage new items | Manage expired items | Action needed | C:/Users/hcladmin/Desktop/B2bTemplateV5-demo.xlsx | In Transit | B2B    |
+      #| H&M   | Spain   | Passeig de Gràcia 11(ES0200) | swetha.pr@storelens.com | Manage new items | Manage expired items | Action needed | C:/Users/hcladmin/Desktop/B2bTemplateV5-demo.xlsx | In Transit | B2B    |
+      | WEEKDAY | United Kingdom | Weekday Soho(GB0989)|arti.kumari@storelens.com | Manage new items | Manage expired items | Action needed | C:/Users/hcladmin/Desktop/B2bTemplateV5-demo.xlsx | In Transit | B2B    |        

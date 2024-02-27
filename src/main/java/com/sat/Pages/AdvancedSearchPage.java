@@ -2,9 +2,14 @@ package com.sat.Pages;
 
 import static org.testng.Assert.assertTrue;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 //import com.sat.testUtil.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -53,9 +58,12 @@ public class AdvancedSearchPage {
 	@FindBy(xpath = "//input[@appmagic-control='TxtBrandAdvtextbox']")
 	private WebElement BrandEntryBox;
 	
+	@FindBy(xpath = "//input[@appmagic-control='TxtKeywordAdvtextbox']")
+	private WebElement itemEntryBox;
+	
 	@FindBy(xpath = "//input[@appmagic-control='txtPurchasePrice_1textbox']")
 	private WebElement PurchaseEntryBox;
-	
+	 
 	@FindBy(xpath = "//input[@appmagic-control='TxtBrandAdv_ISTtextbox']")
 	private WebElement inStoreBrandEntryBox;
 	
@@ -191,8 +199,6 @@ public class AdvancedSearchPage {
     @FindBy(xpath = "//div[@data-control-name='icnSortPriceHeaderMIS']")
    	private WebElement sortPrice;
     
-    
-    
     @FindBy(xpath = "//div[@data-control-name='icnSortTrendHeader_1']")
    	private WebElement sortInstoreTrend;
     
@@ -220,9 +226,51 @@ public class AdvancedSearchPage {
     @FindBy(xpath = "//div[@data-control-name='icnSortDateSubmittedHeaderMIS_2']")
    	private WebElement sortInstoreDate;
     
-//    @FindBy(xpath = " ")
-//   	private WebElement ;
-//    
+    @FindBy(xpath = "(//input[@appmagic-control='cbSelectItemMIS'])[1]") //cbSelectItemMSS
+	private WebElement checkBoxAllItemPage;
+    
+    @FindBy(xpath = "//div[@data-control-name='btnReturnAllItems']")
+   	private WebElement returnToSeller;
+    
+    @FindBy(xpath = "//div[@data-control-name='btn_Next_Pending_Item_PS_3']//div[contains(text(),'NEXT')] ")
+   	private WebElement nextButtonReturnToSeller;
+    
+    @FindBy(xpath = "//div[@data-control-name='btn_ScanParcel_PS_1']//div[text()='SCAN PARCEL']")
+   	private WebElement scan_button_ReturnToSeller;
+    
+    @FindBy(xpath ="//div[text()='Add parcel ID manually']")
+	private WebElement addparcelIdManually_RS;
+    
+    @FindBy(xpath ="//input[@appmagic-control='txt_ParcelID_PS_automanual_1textbox']")
+	private WebElement parcelNumber_RS;
+    
+    @FindBy(xpath = "//div[text()='DONE']/ancestor::div[@data-control-name='btn_Next_Pending_Item_PS_4'] ")
+   	private WebElement parcelIDDone_ReturnToSeller;
+    
+  @FindBy(xpath = "//div[text()='DONE']/ancestor::div[@data-control-name='btn_Next_Pending_Item_PS_3']")
+ 	private WebElement done_ReturnToSeller;
+  
+  @FindBy(xpath = "//div[@data-control-name='btnOKStatusChangeMIS_15']//div[text()='OK']")
+ 	private WebElement okButton_ReturnToSeller;
+  
+  @FindBy(xpath = "//div[@data-control-name='Header_17']")
+ 	private WebElement orderId;
+  
+  @FindBy(xpath = "(//div[@data-control-name='lblOrderStatusMIS'])[1]")
+	private WebElement returnOrderId;
+  
+  @FindBy(xpath = "//div[@data-control-name='lblb2bheader']")
+	private WebElement b2BSellerColAllItem;
+    
+  @FindBy(xpath = "//div[@data-control-name='lblSellerTypeHeaderMIS_3']")
+	private WebElement b2BSellerColInstore;
+  
+  @FindBy(xpath = "//div[@data-focuszone-id='FocusZone1']")
+	private WebElement b2BSellerFieldAllItem;
+  
+  @FindBy(xpath = "//div[@data-focuszone-id='FocusZone2']")
+	private WebElement b2BSellerFieldInStore;
+  
 //    @FindBy(xpath = "")
 //   	private WebElement ;
     
@@ -236,11 +284,108 @@ public class AdvancedSearchPage {
 	private WebElement selectOnApps;
 	
 	
-	
+	public int randomNumber;
 	public AdvancedSearchPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+	
+	 public void ClickOnCheckboxOnAllItemPage() throws InterruptedException
+	 {
+		 Thread.sleep(5000);
+		 Wait.untilPageLoadComplete(driver, 80);
+		 Wait.elementToBeClickable(driver, checkBoxAllItemPage, 3);
+		 testutil.actionMethodClick(driver, checkBoxAllItemPage);
+		// checkBoxAllItemPage.click();
+		 Wait.waitForInvisibilityOfElement(driver, checkBoxAllItemPage, 200);
+		  Wait.untilPageLoadComplete(driver, 80); 
+	 }
+
+	 public void ClickOnReturnToSeller() throws InterruptedException
+	 {
+		 Thread.sleep(5000);
+		 Wait.untilPageLoadComplete(driver, 80);
+		 Wait.elementToBeClickable(driver, returnToSeller, 3);
+		 testutil.actionMethodClick(driver, returnToSeller);
+		// returnToSeller.click();
+		 Wait.waitForInvisibilityOfElement(driver, returnToSeller, 200);
+		  Wait.untilPageLoadComplete(driver, 80); 
+	 }
+	 
+	 public void next_button_ReturnToSeller() throws InterruptedException  {
+			Robot robot;
+			try {
+				robot = new Robot();
+				System.out.println("About to zoom in");
+				for (int k = 0; k < 4; k++) {
+					System.out.println("executing for loop");
+					robot.keyPress(KeyEvent.VK_CONTROL);
+					robot.keyPress(KeyEvent.VK_SUBTRACT);
+					robot.keyRelease(KeyEvent.VK_SUBTRACT);
+					robot.keyRelease(KeyEvent.VK_SUBTRACT);
+					robot.keyRelease(KeyEvent.VK_CONTROL);
+				}
+			} catch (AWTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Thread.sleep(3000);
+			Wait.elementToBeClickable(driver, nextButtonReturnToSeller, 3);
+			testutil.actionMethodClick(driver, nextButtonReturnToSeller);
+			Thread.sleep(3000);
+		}
+	 public void scan_parcel_Return_To_Seller() throws InterruptedException  {
+
+			boolean isButtonDisplayed=scan_button_ReturnToSeller.isDisplayed();
+			if(isButtonDisplayed) {
+				System.out.println("Button is displayed on the web page");
+			}
+				else {
+					System.out.println("Button is not displayed on the web page");
+				}
+			Thread.sleep(3000);
+			Wait.elementToBeClickable(driver, scan_button_ReturnToSeller, 3);
+			scan_button_ReturnToSeller.click();
+			Thread.sleep(3000);
+			}	
+
+	 public void generate_parcelId_Return_To_Seller() throws AWTException, InterruptedException
+		{
+//			Robot robot = new Robot();
+//	        System.out.println("About to zoom in");
+//				for (int i = 0; i < 4; i++) {
+//		            robot.keyPress(KeyEvent.VK_CONTROL);
+//		            robot.keyPress(KeyEvent.VK_ADD);
+//		            robot.keyRelease(KeyEvent.VK_ADD);
+//		            robot.keyRelease(KeyEvent.VK_CONTROL);
+//				}
+				Thread.sleep(3000);
+				System.out.println("Trying to create unique id manually");
+				testutil.actionMethodClick(driver, addparcelIdManually_RS);
+			 	int number = ThreadLocalRandom.current().nextInt();
+				System.out.println("random  number before absolute:" + number);
+				 randomNumber = Math.abs(number);
+				System.out.println("random number is:" + randomNumber);
+				Wait.waitUntilElementVisible(driver, parcelNumber_RS);
+				parcelNumber_RS.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+				parcelNumber_RS.sendKeys(String.valueOf(randomNumber));
+				//parcelNumber_RS.sendKeys(Keys.ENTER);
+				parcelIDDone_ReturnToSeller.click();
+				Thread.sleep(3000);
+				Wait.waitForInvisibilityOfElement(driver, parcelIDDone_ReturnToSeller, 5);
+				done_ReturnToSeller.click();
+				Thread.sleep(3000);
+				Wait.waitForInvisibilityOfElement(driver, done_ReturnToSeller, 5);
+		}
+	 public void validateOrderId()
+	 {
+		 okButton_ReturnToSeller.click();
+			Wait.waitForInvisibilityOfElement(driver, okButton_ReturnToSeller, 5);
+			String actual_orderid= orderId.getText();
+			String return_orderid= returnOrderId.getText();
+			assertTrue(actual_orderid.equalsIgnoreCase(return_orderid));
+			Wait.untilPageLoadComplete(driver, 30);
+	 }
 	
 	public boolean isClickable(WebElement ele) {
 		boolean flag = true;
@@ -283,6 +428,7 @@ public class AdvancedSearchPage {
 	
 	public void sortingOfTrendAndOrderNumber()
 	{
+		b2BSellerColAllItem.click();
 		sortTrend.click();
 		sortTrend.click();
 		sortOrderNumber.click();
@@ -312,6 +458,7 @@ public class AdvancedSearchPage {
 	
 	public void sortingOfInStoreTrendAndOrderNumber()
 	{
+		b2BSellerColInstore.click();
 		sortInstoreTrend.click();
 		sortInstoreTrend.click();
 		sortInstoreOrderNumber.click();
@@ -349,6 +496,20 @@ public class AdvancedSearchPage {
 		String keyWordText = keyWordFieldText.getAttribute("placeholder");
 		Wait.untilPageLoadComplete(driver, 30);
 		assertTrue(keywrdtext.equalsIgnoreCase(keyWordText));
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void validateB2bColAllItem(String actualColName) {
+		String exceptedColName = b2BSellerColAllItem.getAttribute("InnerText");
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(exceptedColName.equalsIgnoreCase(actualColName));
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void validateB2bColInstore(String actualColName) {
+		String exceptedColName = b2BSellerColInstore.getAttribute("InnerText");
+		Wait.untilPageLoadComplete(driver, 30);
+		assertTrue(exceptedColName.equalsIgnoreCase(actualColName));
 		Wait.untilPageLoadComplete(driver, 30);
 	}
 	
@@ -400,6 +561,27 @@ public class AdvancedSearchPage {
 	{
 		Wait.untilPageLoadComplete(driver, 30);
 		BrandEntryBox.sendKeys(brand);
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void enterB2bSeller(String b2BSeller)
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		b2BSellerFieldAllItem.sendKeys(b2BSeller);
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void enterB2bSellerInstore(String b2BSeller)
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		b2BSellerFieldInStore.sendKeys(b2BSeller);
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void enterItemId(String itemid)
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		itemEntryBox.sendKeys(itemid);
 		Wait.untilPageLoadComplete(driver, 30);
 	}
 	
@@ -676,7 +858,6 @@ public class AdvancedSearchPage {
     	Wait.untilPageLoadComplete(driver, 80);
     }
     
-    
    public void validateLifeOfItem(String brand)
    {
 	   LocalDate today=LocalDate.now();
@@ -810,7 +991,7 @@ public class AdvancedSearchPage {
 	   
 	   public void scrollTillViewElement(String ele)
 	   {
-		  WebElement viewElement=driver.findElement(By.xpath("(//div[text()='"+ele+"'])[1]"));
+		  WebElement viewElement=driver.findElement(By.xpath("(//div[text()='"+ele+"'])[2]"));
 		  Wait.untilPageLoadComplete(driver, 80);
 		   Wait.scrollToView(driver,viewElement);
 		   Wait.scrollToView(driver,viewElement);
@@ -938,6 +1119,8 @@ public class AdvancedSearchPage {
 			  Wait.untilPageLoadComplete(driver, 80); 
 		 }
 		 
+	   
+	   
 		 public void clickOnThreeDot()
 		 {
 			 Wait.untilPageLoadComplete(driver, 100);

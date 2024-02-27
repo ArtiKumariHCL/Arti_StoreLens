@@ -80,6 +80,7 @@ Feature: B2B validation under store side and order mark as Missing and Broken an
     And click on the Advanced Search in All Items page
     Then click on Advance Search Status Dropdown with "<AdvStatus>"
     And Validate order number added in All Items tab matches with In-trasit Receiving page
+    And Validate price currency "£" in All Items tab
 
     Examples: 
       | Brand   | Country        | Store                      | B2Btab | ActionNeeded  | StatusNeed        | tab       | AdvStatus |
@@ -103,7 +104,8 @@ Feature: B2B validation under store side and order mark as Missing and Broken an
     And click on the Advanced Search in All Items page
     Then click on Advance Search Status Dropdown with "<AdvStatus>"
     And Validate order number added in All Items tab matches with In-trasit Receiving page
-
+    And Validate price currency "£" in All Items tab 
+    
     Examples: 
       | Brand   | Country        | Store                      | B2Btab | ActionNeeded  | StatusNeed       | tab       | AdvStatus |
       | WEEKDAY | United Kingdom | Weekday Shoreditch(GB0977) | B2B    | Action needed | Report as broken | All Items | Broken    |

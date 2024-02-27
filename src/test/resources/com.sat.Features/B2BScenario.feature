@@ -9,7 +9,7 @@ Feature: Validation of B2B File Upload for a New Order
     Then verify all entities are appearing under Manage new items
       |NEW ORDERS - PENDING|Create orders & scan parcel ID|SENDING - IN TRANSIT|Send items to store|RECEIVING - IN TRANSIT|Receive items from store|
     Then verify all entities are appearing on the left panel Common Task
-      | Home | New order | Items | Orders | 
+      | Home | New order | Items | Orders |Sale data| 
     And click on New Order button
     Then navigate to New Order
      And user validate and select Receiving Store "Weekday Shoreditch(GB0977)" from Receiving Store dropdown

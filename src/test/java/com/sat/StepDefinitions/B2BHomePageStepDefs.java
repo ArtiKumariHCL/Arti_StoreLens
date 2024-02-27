@@ -148,7 +148,22 @@ public class B2BHomePageStepDefs {
 	 @And("click on Order button")
 	 public void click_onorder_button()
 	 {
-		 bbhomepage.Click_on_order();
+		 try {
+		 bbhomepage.Click_on_order_page();
+	 } catch (Exception e) {
+         System.out.println("Exception :" + e + " has occurred");
+     }
+		 
+	 }
+	 
+	 @And("click on Item button")
+	 public void click_on_item_button()
+	 {
+		 try {
+		 bbhomepage.Click_on_item_page();
+	 } catch (Exception e) {
+         System.out.println("Exception :" + e + " has occurred");
+     }
 		 
 	 }
 	 
@@ -227,6 +242,17 @@ public class B2BHomePageStepDefs {
 	            System.out.println("Exception :" + e + " has occurred");
 	        }
 	 }
+	 
+	 @And("Generate the unique parcel ID and click on done in B2B App")
+	 public void generate_parcelID_in_B2BApp()
+	 {
+		 try {
+	        	bbhomepage.generate_parcelId_B2BApp();
+	        } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+	 }
+	 
 	 @And("click on Home button")
 	 public void Click_homebtn()
 	 {
@@ -286,6 +312,29 @@ public class B2BHomePageStepDefs {
 	 {
 		 bbhomepage.Validate_Sending_and_receiving(tab,datatable);
 	 }
+	 
+	 @And("validate the following {string} are present in order in B2B App")
+	 public void sending_and_receiving_OrderPage_B2B_App(String tab,DataTable datatable) throws IOException, InterruptedException
+	 {
+		 bbhomepage.Validate_All_Sending_and_receiving(tab,datatable);
+	 }
+	 
+	 @Then("user validate column name {string} in item page in B2B App")
+		public void user_validate_column_name_in_item_pages_B2BApp(String string) {
+			try {
+				bbhomepage.validateOrderNumber(string);
+	        } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+			
+		}
+	 
+	 @And("validate the following {string} are present in item page in B2B App")
+	 public void active_and_archive_itemPage_B2B_App(String tab,DataTable datatable) throws IOException, InterruptedException
+	 {
+		 bbhomepage.validate_active_and_archive(tab,datatable);
+	 }
+	 
 	 @And("validate the count for Sending and receiving count")
 	 public void Sending_and_receiving_count() throws IOException, InterruptedException
 	 {
@@ -301,6 +350,13 @@ public class B2BHomePageStepDefs {
 	 {
 		 bbhomepage.In_transit_button_click();
 	 }
+	 
+	 @Then("Click on Receiving In-Transit in B2B App")
+	 public void receivingIn_transit_in_B2B_App() throws IOException, InterruptedException
+	 {
+		 bbhomepage.receiving_In_transit_B2BApp();
+	 }
+	 
 	 @And("click on three dots and Validate field are visible")
 	 public void Click_threedots_validate_field(DataTable datatable) throws IOException, InterruptedException
 	 {
@@ -311,6 +367,18 @@ public class B2BHomePageStepDefs {
 	            System.out.println("Exception :" + e + " has occurred");
 	        }
 	    }
+	 
+	 @And("click on three dots and Validate field are visible in Receive Parcel page")
+	 public void Click_threedots_validate_field_in_Receive_Parcel(DataTable datatable) throws IOException, InterruptedException
+	 {
+		
+		 try {
+	        	bbhomepage.threedots_click_validate_fields_Parcel(datatable);
+	        } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+	 }
+	 
 	 @And("click on three dots and Validate field are visible in B2B App")
 	 public void Click_threedots_validate_field_in_b2bApp(DataTable datatable) throws IOException, InterruptedException
 	 {
@@ -322,6 +390,26 @@ public class B2BHomePageStepDefs {
 	        }
 	    }
 	 
+	 @Then("user click on yes button")
+	 public void user_click_on_yes_button_in_B2B_App() throws IOException, InterruptedException
+	 {
+		 try {
+		 bbhomepage.clickOnYesButton();
+	 } catch (Exception e) {
+         System.out.println("Exception :" + e + " has occurred");
+     }
+	 }
+	 
+	 @Then("user validate returned order in order page")
+	 public void user_validate_return_order_in_B2B_App() throws IOException, InterruptedException
+	 {
+		 try {
+		 bbhomepage.enterTextInSearchBoxInB2B();
+	 } catch (Exception e) {
+         System.out.println("Exception :" + e + " has occurred");
+     }
+	 }
+	 
 	 @Then ("Click on Report as {string} status")
 	 public void Click_BrokenStatus(String statusupdate) 
 	 {
@@ -331,7 +419,11 @@ public class B2BHomePageStepDefs {
 	 @Then ("Click on Change Store as {string} option")
 	 public void Click_Change_Store_options(String statusupdate) 
 	 {
+		 try {
 		 bbhomepage.clickOnChangeStore(statusupdate);
+	 } catch (Exception e) {
+         System.out.println("Exception :" + e + " has occurred");
+     }
 	 }
 	 
 	 @Then ("user update receiving store {string}")
@@ -349,6 +441,30 @@ public class B2BHomePageStepDefs {
 	 public void Validate_Ordernum_allitemtab() throws InterruptedException 
 	 {
 		 bbhomepage.ValidateOrderNumber();
+	 }
+	 
+	 @And("Validate price currency {string} in All Items tab")
+	 public void Validate_Ordernum_allitemtab(String priceCurrency) throws InterruptedException 
+	 {
+		 bbhomepage.validatePriceCurrency(priceCurrency);
+	 }
+	 
+	 @Then("user select {string} from options dropdown")
+	 public void user_select_option_dropdown(String options) throws InterruptedException 
+	 {
+		 bbhomepage.selectOption(options);
+	 }
+	 
+	 @Then("user select {string} from Status dropdown")
+	 public void user_select_Status_dropdown(String status) throws InterruptedException 
+	 {
+		 bbhomepage.selectStatus(status);
+	 }
+	 
+	 @Then("user enter {string} in search textbox")
+	 public void user_enter_in_search_textbox(String text) throws InterruptedException 
+	 {
+		 bbhomepage.searchTextBox(text);
 	 }
 }
 	 
