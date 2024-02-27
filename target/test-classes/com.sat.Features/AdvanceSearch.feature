@@ -172,3 +172,5 @@ Feature: Validate Advance Search in Resale App
     Examples: 
       | Brand   | Country | Store             |
       | WEEKDAY | Sweden  | Drottninggatan 63 |
+      
+      

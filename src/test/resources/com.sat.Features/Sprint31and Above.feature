@@ -35,13 +35,12 @@ Feature: Validation of life time/final pick up time of item
     Then verify all entities are appearing on the left panel
       | Brand settings | Country settings | Store settings | Manage Agreement | Manage users | Report | Status update |
     Then user click on all entities are appearing on the left panel
-    | BrandSettings | CountrySettings | StoreSettings | ManageAgreement | ManageUsers | Report | StatusUpdate |
-    
-    
+      | BrandSettings | CountrySettings | StoreSettings | ManageAgreement | ManageUsers | Report | StatusUpdate |
+
     Examples: 
-      | Brand   | Country         | Store                     |
+      | Brand   | Country        | Store                     |
       #| COS     | The Netherlands | Virtual COS(NL0000)       |
-      | WEEKDAY | United Kingdom  | Weekday Sheffield(GB0988) |
+      | WEEKDAY | United Kingdom | Weekday Sheffield(GB0988) |
 
   @US11873&US11874
   Scenario Outline: Validation of COS Rollout for COS,AT
@@ -111,9 +110,8 @@ Feature: Validation of life time/final pick up time of item
       | WEEKDAY | Belgium        | Meir 78(BE0401)                   |
       | WEEKDAY | Netherland     | Weekday Amsterdam De Pijp(NL0658) |
       | WEEKDAY | United Kingdom | Weekday Sheffield(GB0988)         |
-      
-  
-  @US12337    
+
+  @US12337
   Scenario Outline: Run the automatic cloudflow job
     And select "<Brand>","<Country>","<Store>"
     And user scroll into "Expired"
@@ -134,58 +132,77 @@ Feature: Validation of life time/final pick up time of item
     Examples: 
       | Brand   | Country | Store                     |
       | WEEKDAY | Sweden  | Drottninggatan 63(SE0655) |
-     
-     @US12338
+
+  @US12338
   Scenario Outline: Validation of filter option and sorting for Trend and Order Number
     And select "<Brand>","<Country>","<Store>"
     #Then user scroll into "Manage users"
     #And naviagte to manage users section and search with "<User>" and select role to "<Role>" and save it
-    
     Then user click on "All Items" pages
     And user click on the Advance Search
-     And user validated and select Trend "Cargo" from Trend dropdown
-      Then user validate and click on Search button
-      Then user validate acending and descending order of sorting for Trend column and Order Number column
-      And user validate acending and descending order of sorting for All column
-      
-       Then user click on "Archive" pages
+    And user validated and select Trend "Cargo" from Trend dropdown
+    Then user validate and click on Search button
+    Then user validate acending and descending order of sorting for Trend column and Order Number column
+    And user validate acending and descending order of sorting for All column
+    Then user click on "Archive" pages
     And user click on the Advance Search
-     And user validated and select Trend "Cargo" from Trend dropdown
-      Then user validate and click on Search button
-      Then user validate acending and descending order of sorting for Trend column and Order Number column
-      And user validate acending and descending order of sorting for All column
-    
+    And user validated and select Trend "Cargo" from Trend dropdown
+    Then user validate and click on Search button
+    Then user validate acending and descending order of sorting for Trend column and Order Number column
+    And user validate acending and descending order of sorting for All column
     Then user click on "In-Store" pages
     And user click on the Advance Search
-     And user validate and select Trend "Cargo" from Trend dropdown
-      Then user validate and click on Search button
-       Then user validated acending and descending order of sorting for Trend column and Order Number column
-      And user validated acending and descending order of sorting for All column
-      
-      Then user click on "In-Store 2nd Try" pages
+    And user validate and select Trend "Cargo" from Trend dropdown
+    Then user validate and click on Search button
+    Then user validated acending and descending order of sorting for Trend column and Order Number column
+    And user validated acending and descending order of sorting for All column
+    Then user click on "In-Store 2nd Try" pages
     And user click on the Advance Search
-     And user validate and select Trend "Cargo" from Trend dropdown
-      Then user validate and click on Search button
-       Then user validated acending and descending order of sorting for Trend column and Order Number column
-      And user validated acending and descending order of sorting for All column
-    
+    And user validate and select Trend "Cargo" from Trend dropdown
+    Then user validate and click on Search button
+    Then user validated acending and descending order of sorting for Trend column and Order Number column
+    And user validated acending and descending order of sorting for All column
     And user scroll into "Storage"
     Then user click on "Storage" pages
     And user click on the Advance Search
-     And user validate and select Trend "Cargo" from Trend dropdown
-      Then user validate and click on Search button
-       Then user validated acending and descending order of sorting for Trend column and Order Number column
-      And user validated acending and descending order of sorting for All column
-      
-       And user scroll into "Expired"
-      Then user click on "Expired" pages
+    And user validate and select Trend "Cargo" from Trend dropdown
+    Then user validate and click on Search button
+    Then user validated acending and descending order of sorting for Trend column and Order Number column
+    And user validated acending and descending order of sorting for All column
+    And user scroll into "Expired"
+    Then user click on "Expired" pages
     And user click on the Advance Search
-     And user validate and select Trend "Cargo" from Trend dropdown
-      Then user validate and click on Search button
-       Then user validated acending and descending order of sorting for Trend column and Order Number column
-      And user validated acending and descending order of sorting for All column
+    And user validate and select Trend "Cargo" from Trend dropdown
+    Then user validate and click on Search button
+    Then user validated acending and descending order of sorting for Trend column and Order Number column
+    And user validated acending and descending order of sorting for All column
 
     Examples: 
-      | Brand| Country | Store                     | User                | Role  | existingseller      | tab       |
-      | H&M |Spain  | Virtual HM Flamingo(ES000000) |arti.kumari@storelens.com | Admin | arti-kumari@hcl.com | All Items |
-      
+      | Brand | Country | Store                         | User                      | Role  | existingseller      | tab       |
+      | H&M   | Spain   | Virtual HM Flamingo(ES000000) | arti.kumari@storelens.com | Admin | arti-kumari@hcl.com | All Items |
+
+  @US11879
+  Scenario Outline: Validation of Add Purchase Price for B2B Seller and Normal Seller
+    When user navigating to ResaleApp with valid credentials and signin
+    And select "<Brand>","<Country>","<Store>"
+    Then user click on "All Sellers" pages
+    Then user click on "SHOW ALL SELLERS" pages
+    Then user click on "B2B Sellers only" pages
+    And user enter seller name as "Arti" in search textbox
+    Then user click on seller name from result grid
+    And click on AddItem button and enter "<Number of Items>", select "<Unsold Item>" and click Next button and enter sign save it
+    #And Open the "<status>" item and validate
+    And Open the "<status>" item
+    Then validated Purchses Price text Box should be display for B2B Seller
+    Then user click on "All Sellers" pages
+    Then user click on "SHOW ALL SELLERS" pages
+    And user enter seller name as "Arti" in search textbox
+    Then user click on seller name from result grid
+    And click on AddItem button and enter "<Number of Items>", select "<Unsold Item>" and click Next button and enter sign save it
+    And Open the "<status>" item
+    #And click on "<status>" item and generate id by clicking on edit button and save it
+    Then validated Purchses Price text Box should not be display for Normal Seller
+
+    Examples: 
+      | Brand   | Country | Store                     | Number of Items | Unsold Item | status  |
+      | WEEKDAY | Sweden  | Drottninggatan 63(SE0655) |               1 | Pickup      | Pending |

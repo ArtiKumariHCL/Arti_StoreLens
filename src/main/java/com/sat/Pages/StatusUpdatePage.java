@@ -1,5 +1,7 @@
 package com.sat.Pages;
 
+import static org.testng.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -65,6 +67,21 @@ public class StatusUpdatePage {
 			}
 		}
 	}
+	
+	public void clickOnManageUsersTab() {
+		Boolean flag = false;
+		while (!flag) {
+			List<WebElement> ele = driver.findElements(By.xpath("//div[text()='Manage users' and @class='appmagic-button-label no-focus-outline']"));
+			for (int i = 0; i < ele.size(); i++) {
+				if (isClickable(ele.get(i))) {
+					util.actionMethodClick(driver, ele.get(i));
+					flag = true;
+					i = ele.size();
+				}
+			}
+		}
+	}
+	
 	public void searchforItemID(String itemID){
 		searchItemID.click();
 		searchItemID.clear();
@@ -88,6 +105,15 @@ public class StatusUpdatePage {
 	}
 	public void clickOnUpdate() {
 		util.actionMethodClick(driver, update);
+	}
+	
+	public void validationOfRegularSeller()
+	{
+		String actualText=driver.findElement(By.xpath("//div[@data-control-name='Label3_1']")).getAttribute("innerText");
+		Wait.untilPageLoadComplete(driver, 30);
+    	assertTrue(actualText.equalsIgnoreCase("For regular seller, Archive item status are restricted to change"));
+    	Wait.untilPageLoadComplete(driver, 80);
+		
 	}
 
 	public List<String> getItemIdsForSameStatusItem(String no_ofitr, String status) {

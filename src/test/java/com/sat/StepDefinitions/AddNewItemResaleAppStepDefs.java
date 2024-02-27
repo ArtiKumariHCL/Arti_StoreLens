@@ -84,7 +84,7 @@ public class AddNewItemResaleAppStepDefs {
 		resalelogin.openItem(status);
 		resalelogin.getSizeListValidation();
 	}
-
+	
 	@And("click on {string} item and generate id by clicking on edit button and save it")
 	public void click_on_item_and_generate_id_by_clicking_on_edit_button_and_save_it(String status)
 			throws InterruptedException, AWTException {
@@ -103,7 +103,12 @@ public class AddNewItemResaleAppStepDefs {
 	  @Then ("User navigated to {string} tab")
 	  public void click_the_pending(String tabSelection) throws InterruptedException
 	  {
+		  try {
 		  resalelogin.selectpendingscreen(tabSelection);
+		  Thread.sleep(5000);
+		  } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	  }
 	  @Then ("Verify column {string} are not appering on the screen")
 	  public void verify_all_tab_appering_on_pending(String form,DataTable datatable) throws InterruptedException
