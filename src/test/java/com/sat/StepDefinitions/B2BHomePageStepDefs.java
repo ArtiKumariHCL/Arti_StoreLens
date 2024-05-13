@@ -2,8 +2,10 @@ package com.sat.StepDefinitions;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +25,7 @@ import com.sat.Pages.ResaleLoginPage;
 import com.sat.Pages.StoreCalendarsPage;
 import com.sat.Pages.StoreSettingsPage;
 import com.sat.config.ConfigFileReader;
+import com.sat.testData.ExcelReader;
 import com.sat.testbase.TestBase;
 
 import io.cucumber.datatable.DataTable;
@@ -285,38 +288,66 @@ public class B2BHomePageStepDefs {
 	 @And("Click on New Order pending {string} and {string}")
 	 public void Click_NewPending(String store,String  Store_no) throws IOException
 	 {
+		 try {
 		 bbhomepage.Click_NewOrderPending(store,Store_no);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @And("verify the text display with yellow color highlight {string}")
 	 public void text_appearsYellow(String excelpath) throws IOException
 	 {
+		 try {
 		 bbhomepage.validate_textyellow(excelpath);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @And("click on upload file to excel {string}")
 	 public void upload_excel_pending(String excelpath) throws IOException
 	 {
+		 try {
 		 bbhomepage.click_excel_pending(excelpath);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @Then("validate under {string} following Entity")
 	 public void validateactionneed(String actionneed,DataTable datatable) throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.validate_actionneeded(actionneed,datatable);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @Then("Validate the count of sending In-transit in resale app with B2B app")
 	 public void Sending_Intransit_resaleapp() throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.Sending_Intransit_resaleapp();
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @And("validate the following field are present in {string}")
 	 public void Sending_and_receiving(String tab,DataTable datatable) throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.Validate_Sending_and_receiving(tab,datatable);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @And("validate the following {string} are present in order in B2B App")
 	 public void sending_and_receiving_OrderPage_B2B_App(String tab,DataTable datatable) throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.Validate_All_Sending_and_receiving(tab,datatable);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @Then("user validate column name {string} in item page in B2B App")
@@ -332,29 +363,49 @@ public class B2BHomePageStepDefs {
 	 @And("validate the following {string} are present in item page in B2B App")
 	 public void active_and_archive_itemPage_B2B_App(String tab,DataTable datatable) throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.validate_active_and_archive(tab,datatable);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @And("validate the count for Sending and receiving count")
 	 public void Sending_and_receiving_count() throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.ValidateSendingandreceivingcount();
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @Then("validate Sales data display latest five top categories details")
 	 public void Sales_display_latest_five_categories() throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.ValidateSalesCategories();
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @Then("Click on In-Transit Receiving")
 	 public void In_transit_receiving() throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.In_transit_button_click();
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @Then("Click on Receiving In-Transit in B2B App")
 	 public void receivingIn_transit_in_B2B_App() throws IOException, InterruptedException
 	 {
+		 try {
 		 bbhomepage.receiving_In_transit_B2BApp();
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @And("click on three dots and Validate field are visible")
@@ -413,7 +464,11 @@ public class B2BHomePageStepDefs {
 	 @Then ("Click on Report as {string} status")
 	 public void Click_BrokenStatus(String statusupdate) 
 	 {
+		 try {
 		 bbhomepage.clickOnMissing(statusupdate);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @Then ("Click on Change Store as {string} option")
@@ -429,24 +484,40 @@ public class B2BHomePageStepDefs {
 	 @Then ("user update receiving store {string}")
 	 public void user_update_receiving_Store(String receivingstore) 
 	 {
+		 try {
 		 bbhomepage.seletReceivingStore(receivingstore);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @Then("click on Advance Search Status Dropdown with {string}")
 	 public void Click_advancesearch_dropdown(String missing) throws InterruptedException 
 	 {
+		 try {
 		 bbhomepage.clickOnadvanceSearchstatus(missing);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 @And("Validate order number added in All Items tab matches with In-trasit Receiving page")
 	 public void Validate_Ordernum_allitemtab() throws InterruptedException 
 	 {
+		 try {
 		 bbhomepage.ValidateOrderNumber();
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @And("Validate price currency {string} in All Items tab")
 	 public void Validate_Ordernum_allitemtab(String priceCurrency) throws InterruptedException 
 	 {
+		 try {
 		 bbhomepage.validatePriceCurrency(priceCurrency);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @Then("user select {string} from options dropdown")
@@ -458,13 +529,41 @@ public class B2BHomePageStepDefs {
 	 @Then("user select {string} from Status dropdown")
 	 public void user_select_Status_dropdown(String status) throws InterruptedException 
 	 {
+		 try {
 		 bbhomepage.selectStatus(status);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 	 
 	 @Then("user enter {string} in search textbox")
 	 public void user_enter_in_search_textbox(String text) throws InterruptedException 
 	 {
+		 try {
 		 bbhomepage.searchTextBox(text);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+	 }
+	 
+	 @Then("User validated {string} value from excel file with column heading {string}")
+	 public void user_validate_Gender_and_Trend_list_value_from_and(String sheetname, String columnHeading) throws InvalidFormatException, IOException {
+		 try
+		 {
+		bbhomepage.validateDropDownValueOfGenderAndTrend(sheetname,columnHeading);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
+	 }
+	 
+	 @Then("User validate {string} value from excel file with column heading {string}")
+	 public void user_validate_category_list_value_from_and(String sheetname, String columnHeading) throws InvalidFormatException, IOException {
+		 try
+		 {
+		bbhomepage.validateDropDownValue(sheetname,columnHeading);
+		 } catch (Exception e) {
+	            System.out.println("Exception :" + e + " has occurred");
+	        }
 	 }
 }
 	 

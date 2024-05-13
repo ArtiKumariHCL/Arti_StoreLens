@@ -133,13 +133,16 @@ public class AdvancedSearchPage {
     @FindBy(xpath = "(//div[@data-control-name='icnSellerDetailsMSS_1'])[1]") //(//div[@data-control-name='lblGallerySellerNameMSS_1'])[1]
 	private WebElement sellerNameInResultGrid;
     
+    @FindBy(xpath = "(//div[@data-control-name='icnSelectExistingItemMIS'])[1]") //(//div[@data-control-name='lblGallerySellerNameMSS_1'])[1]
+	private WebElement itemInResultGrid;
+    
     @FindBy(xpath = "//*[@data-control-name='btnSaveExistingItemDetailsMIS_1']")
 	private WebElement saveItem;
     
     @FindBy(xpath = "(//input[@appmagic-control='cbSelectItemMIS_4'])[1]") //cbSelectItemMSS
 	private WebElement checkBox;
     
-    @FindBy(xpath = "//div[@data-control-name='icnSelectAllOptionsSS_4']") //icnSelectAllOptionsMSS
+    @FindBy(xpath = "//div[@data-control-name='icnSelectAllOptionsSS_3']") //icnSelectAllOptionsMSS, icnSelectAllOptionsSS_4
 	private WebElement click3Dot;
     
     @FindBy(xpath = "//*[text()='Change Store']")
@@ -232,6 +235,9 @@ public class AdvancedSearchPage {
     @FindBy(xpath = "//div[@data-control-name='btnReturnAllItems']")
    	private WebElement returnToSeller;
     
+    @FindBy(xpath = "//div[text()='STOCK CHECK']")
+   	private WebElement stockCheck;
+    
     @FindBy(xpath = "//div[@data-control-name='btn_Next_Pending_Item_PS_3']//div[contains(text(),'NEXT')] ")
    	private WebElement nextButtonReturnToSeller;
     
@@ -271,6 +277,48 @@ public class AdvancedSearchPage {
   @FindBy(xpath = "//div[@data-focuszone-id='FocusZone2']")
 	private WebElement b2BSellerFieldInStore;
   
+@FindBy(xpath = "//div[@data-control-name='cbExistingItemCategoryMIS']")
+	private WebElement category;
+
+@FindBy(xpath = "//div[@data-control-name='cbExistingTopBrandsMIS']")
+private WebElement brand;
+
+@FindBy(xpath = "//div[@data-control-name='cbExistingItemGenderMIS']")
+private WebElement gender;
+
+@FindBy(xpath = "//div[@data-control-name='cbExistingItemSizeMIS']")
+private WebElement size;
+
+@FindBy(xpath = "//div[@data-control-name='cbColorSelection']")
+private WebElement color;
+
+@FindBy(xpath = "//div[@data-control-name='cbMaterialSelection']")
+private WebElement material;
+
+@FindBy(xpath = "//div[@data-control-name='cbPattern']")
+private WebElement pattern;
+
+@FindBy(xpath = "//div[@data-control-name='cbExistingItemTrendMIS_1']")
+private WebElement trend;
+
+    @FindBy(xpath = "(//div[@data-control-name='lblItemId'])[1]")
+   	private WebElement copiedItemId;
+    
+    @FindBy(xpath = "//div[@data-control-name='btn_Add_ParcelID_Manually_PS_5']")
+   	private WebElement enterIdManually;
+    
+    @FindBy(xpath = "//input[@appmagic-control='txtAddItemIdMIS_1textbox']")
+   	private WebElement enteredItemId;
+    
+    @FindBy(xpath = "//div[@data-control-name='btnOkItemIdPopUpMIS_15']")
+   	private WebElement apply;
+    
+    @FindBy(xpath = "//div[@data-control-name='btnAcceptPreRegitemsASS_1']")
+   	private WebElement continueBtn;
+    
+    @FindBy(xpath = "//div[@data-control-name='btnOKStockCheck']")
+   	private WebElement done;
+    
 //    @FindBy(xpath = "")
 //   	private WebElement ;
     
@@ -288,6 +336,62 @@ public class AdvancedSearchPage {
 	public AdvancedSearchPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+	}
+	
+	public void clickOnBrandList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		brand.click();
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void clickOnCategoryList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		category.click();
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void clickOnGenderList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		gender.click();
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void clickOnSizeList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		size.click();
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void clickOnColorList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		color.click();
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void clickOnMaterialList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		material.click();
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void clickOnPatternList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		pattern.click();
+		Wait.untilPageLoadComplete(driver, 30);
+	}
+	
+	public void clickOnTrendList()
+	{
+		Wait.untilPageLoadComplete(driver, 30);
+		trend.click();
+		Wait.untilPageLoadComplete(driver, 30);
 	}
 	
 	 public void ClickOnCheckboxOnAllItemPage() throws InterruptedException
@@ -309,6 +413,16 @@ public class AdvancedSearchPage {
 		 testutil.actionMethodClick(driver, returnToSeller);
 		// returnToSeller.click();
 		 Wait.waitForInvisibilityOfElement(driver, returnToSeller, 200);
+		  Wait.untilPageLoadComplete(driver, 80); 
+	 }
+	 
+	 public void ClickOnStockCheck() throws InterruptedException
+	 {
+		 Thread.sleep(5000);
+		 Wait.untilPageLoadComplete(driver, 80);
+		 Wait.elementToBeClickable(driver, stockCheck,3);
+		 testutil.actionMethodClick(driver, stockCheck);
+		 Wait.waitForInvisibilityOfElement(driver, stockCheck, 200);
 		  Wait.untilPageLoadComplete(driver, 80); 
 	 }
 	 
@@ -827,6 +941,16 @@ public class AdvancedSearchPage {
     	Wait.untilPageLoadComplete(driver, 80);
     }
     
+    public void clickOnItemDetail()
+    {
+    	Wait.untilPageLoadComplete(driver, 100);
+    	Wait.elementToBeClickable(driver, itemInResultGrid, 3);
+    	itemInResultGrid.click();
+    	//driver.findElement(By.xpath("(//div[@data-control-name='lblGallerySellerNameMSS_1'])[1]")).click();
+    	Wait.waitForInvisibilityOfElement(driver, itemInResultGrid, 200);
+    	Wait.untilPageLoadComplete(driver, 80);
+    }
+    
     
     public void validateFieldCount()
     {
@@ -998,24 +1122,31 @@ public class AdvancedSearchPage {
 		   Wait.untilPageLoadComplete(driver, 80);
 	   }
 
-	   public void validateleftMenu(DataTable datatable) throws InterruptedException {
+	   public void validateleftMenu(DataTable datatable)throws InterruptedException  {
 		   List<String> actual = datatable.asList();
 			System.out.println("Size = "+ actual.size());
 			
 			try {
 			for (int i = 0; i <= actual.size()-1; i++) {
 		                 String content = actual.get(i);
+		                 System.out.println("Expected Data Contain : "+content);
+		                 Wait.untilPageLoadComplete(driver, 500);
+		                 Thread.sleep(3000);
 		            	WebElement data=driver.findElement(By.xpath("(//div[text()='"+content+"'])[1]"));
-		            	System.out.println("Data Contain : "+data.getText());
+		            	System.out.println("Actual Data Contain : "+data.getText());
 		            	Wait.scrollToView(driver,data);
-		            	
 		            	if(actual.get(i).equalsIgnoreCase(data.getText()))
 		            	{
-		            		System.out.println("This is Expected:" + data.getText()+" == "+" This is Actual:  "+actual.get(i));
+		            		Thread.sleep(3000);
+      	            		data.click();
+		            		Wait.scrollToView(driver,data);
+		            		Thread.sleep(3000);
+		            		System.out.println("This is Actual:" + data.getText()+" == "+" This is Expected:  "+actual.get(i));
+		            		
 		            	}
 		            	else
 		            	{
-		            		System.out.println( "This is Expected  "+data.getText()+" is not equal "+"This is Actual  "+actual.get(i));
+		            		System.out.println( "This is Actual  "+data.getText()+" is not equal "+"This is Expected  "+actual.get(i));
 		            	}
 		}
 
@@ -1153,6 +1284,44 @@ public class AdvancedSearchPage {
 		        	}
 			 
 		 }
+		 
+  public void stockCheck()
+  {
+	  String itemId=copiedItemId.getAttribute("innerText");
+	  Wait.untilPageLoadComplete(driver, 100);
+	  enterIdManually.click();
+	  Wait.untilPageLoadComplete(driver, 100);
+	  enteredItemId.sendKeys(itemId);
+	  Wait.untilPageLoadComplete(driver, 100);
+	  apply.click();
+	  Wait.untilPageLoadComplete(driver, 100);
+	  continueBtn.click();
+	  Wait.untilPageLoadComplete(driver, 100);
+	  done.click();
+	  Wait.untilPageLoadComplete(driver, 100);
+	  
+  }
+  
+  public void validateEnableStatus(DataTable datatable) {
+		List<String> actual = datatable.asList();
+		System.out.println("Size = "+ actual.size());
+		for (int i = 0; i <= actual.size()-1; i++) {
+      	
+	                 String content = actual.get(i);
+	            	WebElement data=driver.findElement(By.xpath("//div[@class='appmagic-button-label no-focus-outline'][normalize-space()='"+content+"']"));
+	            	System.out.println("Data Contain : "+data.getText());
+	            	
+	            	if(actual.get(i).equalsIgnoreCase(data.getText()))
+	            	{
+	            		System.out.println("This is Expected:" + data.getText()+" == "+" This is Actual:  "+actual.get(i));
+	            	}
+	            	else
+	            	{
+	            		System.out.println( "This is Expected  "+data.getText()+" is not equal "+"This is Actual  "+actual.get(i));
+	            	}
+	}
+	
+		}
 	   
 	    
 }
