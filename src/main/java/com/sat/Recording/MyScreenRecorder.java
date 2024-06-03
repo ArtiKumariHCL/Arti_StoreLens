@@ -31,6 +31,7 @@ public class MyScreenRecorder extends ScreenRecorder {
 	public static ScreenRecorder screenRecorder;
 	public String name;
 	//public WebDriver driver;
+	//public WebDriver driver;
 	public static Properties prop;
 	public static EventFiringWebDriver e_driver;
 	Wait wait = new Wait();

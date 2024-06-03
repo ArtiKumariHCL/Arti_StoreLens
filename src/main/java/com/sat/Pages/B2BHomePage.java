@@ -1029,6 +1029,7 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
 			 List<Map<String,String>> testdata = reader.getData("C:\\Users\\hcladmin\\Desktop\\AllListData.xlsx", sheetName);
 			 int n= testdata.size();
 			 System.out.println("Total "+columnHeading+" := "+n);
+			 //System.out.println("Total "+columnHeading+" := "+n);
 			 for(int i=0;i<n-1;i++)
 			 {
 			 String data=testdata.get(i).get(columnHeading);

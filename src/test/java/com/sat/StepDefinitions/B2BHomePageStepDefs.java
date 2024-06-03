@@ -563,6 +563,7 @@ public class B2BHomePageStepDefs {
 		bbhomepage.validateDropDownValue(sheetname,columnHeading);
 		 } catch (Exception e) {
 	            System.out.println("Exception :" + e + " has occurred");
+	            //System.out.println("Exception :" + e + " has occurred");
 	        }
 	 }
 }

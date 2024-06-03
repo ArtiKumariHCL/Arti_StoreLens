@@ -44,7 +44,7 @@ Feature: Validation of mapping values of the file upload excel with dropdown val
     #Then user click on three dot
     #Then user validate below status should be enable for Expired item
       #| Broken | Missing | Returned | Pick-up | Charity | In Store 2nd try |Unsold Picked Up Archived |
-      #Then user click on three dot
+      Then user click on three dot
      And user validate stock check function of an item  
      
      #Then user click on "All Items" pages
