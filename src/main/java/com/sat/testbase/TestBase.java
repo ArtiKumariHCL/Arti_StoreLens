@@ -4,6 +4,7 @@ package com.sat.testbase;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 //import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -134,6 +135,33 @@ public class TestBase {
 		getDriver().manage().timeouts().implicitlyWait(Testutil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 		return getDriver();
 	}
+	
+//	public void startRecording() throws Exception
+//	{
+//		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+//		String videoName = "TC_ATU_Test_Video" + timeStamp;
+//		   String videoDir = getFilePath();
+//		   
+//		  
+//	         
+//	       recorder = new ATUTestRecorder(videoDir,videoName,false);
+//	     
+//
+//		 //recorder = new ATUTestRecorder("C:\\Users\\TP_HCLPO-MP1\\Recordings_" + timeStamp,false);
+//	recorder.start();
+//	String Chromepath = “E:\\chromedriver.exe”;
+//	System.setProperty(“webdriver.chrome.driver”, Chromepath);
+//	driver = new ChromeDriver();
+//	driver.manage().window().maximize();
+//	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//	driver.get(“https://www.ignatiuz.com/”);
+//
+//	}
+//	
+//	public void stopRecording() throws Exception
+//	{
+//	recorder.stop();
+//	}
 
 	
 	public static synchronized WebDriver getDriver() {

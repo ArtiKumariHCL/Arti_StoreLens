@@ -5,32 +5,43 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
+import com.sat.Recording.MyScreenRecorder;
 import com.sat.testbase.TestBase;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 public class ApplicationHooks {
 	
-	private TestBase driverFactory;
-	private WebDriver driver;
+	TestBase testbase = new TestBase();	
+	WebDriver driver = TestBase.getDriver();
+	
+	
+	//private TestBase driverFactory;
+//	private WebDriver driver;
 	Properties prop;
 	
 	@Before(order=1)
 	//@Test
-	public void launchbrowser()
+	public void launchbrowser() throws Exception
 	{
-		driverFactory=new TestBase();
-		driver=driverFactory.initializationFireFox();
-		
+		//driverFactory=new TestBase();
+//		testbase.startRecording();
+		MyScreenRecorder.startRecording("launchbrowser");
+		//driver=driverFactory.initializationFireFox();
+		testbase.initializationFireFox();
 		//driver=driverFactory.initialization();
 		
 	}
 
 	@After(order=0)
-	public void QuitBrowser() 
+	public void QuitBrowser() throws Exception 
 	{
-       //driver.quit();
+//		testbase.stopRecording();
+ 	MyScreenRecorder.stopRecording();
+ 	//testbase.quit();
+       driver.quit();
 	}
 	
 //	@After(order=1)

@@ -34,6 +34,48 @@ public class AdvancedSearchStepDef {
         }
 	}
 	
+	@Then("user click on brand dropdown list in item detail page")
+	public void user_click_on_brand_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnBrandList();
+	}
+
+	@Then("user click on gender dropdown list in item detail page")
+	public void user_click_on_gender_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnGenderList();
+	}
+
+	@Then("user click on category dropdown list in item detail page")
+	public void user_click_on_category_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnCategoryList();
+	}
+
+	@Then("user click on size dropdown list in item detail page")
+	public void user_click_on_size_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnSizeList();
+	}
+
+	@Then("user click on material dropdown list in item detail page")
+	public void user_click_on_material_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnMaterialList();
+	}
+	
+
+	@Then("user click on color dropdown list in item detail page")
+	public void user_click_on_color_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnColorList();
+	}
+
+	@Then("user click on pattern dropdown list in item detail page")
+	public void user_click_on_pattern_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnPatternList();
+	}
+
+	@Then("user click on trend dropdown list in item detail page")
+	public void user_click_on_trend_dropdown_list_in_item_detail_page() {
+		advancedSearch.clickOnTrendList();
+	}
+
+	
 	@Then("user search {string} in status update page")
 	public void user_search_itemId(String itemid) {
 		try {
@@ -512,6 +554,16 @@ public class AdvancedSearchStepDef {
 		
 	}
 	
+	@Then("user click on item and open item detail page")
+	public void user_click_on_item_detail_from_result_grid() {
+		try {
+			advancedSearch.clickOnItemDetail();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+		
+	}
+	
 	@Then("user vlidate status of item {string}")
 	public void user_validate_staus_of_item(String status) {
 		advancedSearch.validateStatus(status);
@@ -581,12 +633,22 @@ public class AdvancedSearchStepDef {
 	
 	@Then("user click on Return To Seller button")
 	public void user_click_on_Return_To_seller_item_for_all_item_page() throws InterruptedException {
-		//try {
+		try {
 		
 		advancedSearch.ClickOnReturnToSeller();
-//    } catch (Exception e) {
-//        System.out.println("Exception :" + e + " has occurred");
-//    }
+    } catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
+	}
+	
+	@Then("user click on Stock Check button")
+	public void user_click_on_stock_check_item_for_all_item_page() throws InterruptedException {
+		try {
+		
+		advancedSearch.ClickOnStockCheck();
+    } catch (Exception e) {
+        System.out.println("Exception :" + e + " has occurred");
+    }
 	}
 	
 	@Then("user click on three dot")
@@ -697,4 +759,40 @@ public class AdvancedSearchStepDef {
 	        System.out.println("Exception :" + e + " has occurred");
 	    }
 	}
+	
+	@Then("user validate stock check function of an item")
+    public void user_validate_stock_check_function_of_item() {
+        try {
+        	advancedSearch.stockCheck();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+    }
+	
+	@Then("user validate below status should be enable for Expired item")
+    public void user_validate_status_should_be_enable_for_Expired_item(DataTable datatable) {
+        try {
+        	advancedSearch.validateEnableStatus(datatable);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+    }
+	
+	@Then("user validate below status should be enable for Instore item")
+    public void user_validate_status_should_be_enable_for_Instore_item(DataTable datatable) {
+        try {
+        	advancedSearch.validateEnableStatus(datatable);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+    }
+	
+	@Then("user validate below status should be enable for In Store 2nd try item")
+    public void user_validate_statusshould_be_enable_for_InStore2ndtry_item(DataTable datatable) {
+        try {
+        	advancedSearch.validateEnableStatus(datatable);
+        } catch (Exception e) {
+            System.out.println("Exception :" + e + " has occurred");
+        }
+    }
 }

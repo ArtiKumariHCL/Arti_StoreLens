@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -37,6 +38,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.sat.config.ConfigFileReader;
+import com.sat.testData.ExcelReader;
 import com.sat.testUtil.Testutil;
 import com.sat.testUtil.Wait;
 import com.sat.testbase.TestBase;
@@ -995,6 +997,60 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
     		
   		}
 		
+		public void validateDropDownValueOfGenderAndTrend(String sheetName,String columnHeading) throws InvalidFormatException, IOException {
+			List<WebElement> actualdata=driver.findElements(By.xpath("//div[@aria-label='"+columnHeading+" items']/div"));
+			 ExcelReader reader= new ExcelReader();
+			 List<Map<String,String>> testdata = reader.getData("C:\\Users\\hcladmin\\Desktop\\AllListData.xlsx", sheetName);
+			 int n= testdata.size();
+			 System.out.println("Total "+columnHeading+" := "+n);
+			 for(int i=0;i<n-1;i++)
+			 {
+			 String data=testdata.get(i).get(columnHeading);
+			 System.out.println("ExcelSheet Data := "+data);
+			 for(int j=0;j<actualdata.size();j++)
+			 {
+			 if(data.equalsIgnoreCase(actualdata.get(j).getText()))
+           	{
+           		System.out.println("This is Expected:" + data+" == "+" This is Actual:  "+actualdata.get(j).getText());
+           		break;
+           	}
+           	else
+           	{
+           		System.out.println( "This is Expected  "+data+" is not equal "+"This is Actual  "+actualdata.get(j).getText());
+           	}
+		  }
+		}
+			
+		}
+		
+		public void validateDropDownValue(String sheetName,String columnHeading) throws InvalidFormatException, IOException {
+			List<WebElement> actualdata=driver.findElements(By.xpath("//ul[@class='appmagic-combobox-itemlist itemsContainer_14xc3ab']/li"));
+			 ExcelReader reader= new ExcelReader();
+			 List<Map<String,String>> testdata = reader.getData("C:\\Users\\hcladmin\\Desktop\\AllListData.xlsx", sheetName);
+			 int n= testdata.size();
+			 System.out.println("Total "+columnHeading+" := "+n);
+			 //System.out.println("Total "+columnHeading+" := "+n);
+			 for(int i=0;i<n-1;i++)
+			 {
+			 String data=testdata.get(i).get(columnHeading);
+			 System.out.println("ExcelSheet Data := "+data);
+			 for(int j=0;j<actualdata.size();j++)
+			 {
+			 if(data.equalsIgnoreCase(actualdata.get(j).getText()))
+           	{
+           		System.out.println("This is Expected:" + data+" == "+" This is Actual:  "+actualdata.get(j).getText());
+           		break;
+           	}
+           	else
+           	{
+           		System.out.println( "This is Expected  "+data+" is not equal "+"This is Actual  "+actualdata.get(j).getText());
+           	}
+		  }
+		}
+			
+		}
+		
+		
   		public void threedots_click_validate_fields_in_B2BApp(DataTable datatable) throws InterruptedException
 		  {	
   			System.out.println("Clicking on three dots in Order Page");
@@ -1233,7 +1289,7 @@ public void validate_parcelId(DataTable datatable) throws AWTException, Interrup
     	  Thread.sleep(5000);
 			String actualPriceCurrency = priceCurrency.getText();
 			System.out.println(actualPriceCurrency);
-			if(expectedCurrency.contains("£"))
+			if(expectedCurrency.contains("£")||expectedCurrency.contains("$"))
 					{
 				System.out.println("This is Expected:" + expectedCurrency+" == "+" This is Actual:  "+actualPriceCurrency);
 	            	}
